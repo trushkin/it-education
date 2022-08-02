@@ -1,0 +1,25 @@
+
+M
+java:S6126p"2Replace this String concatenation with Text block.(Ò‰ĞÏûÿÿÿÿ
+T	java:S106"9Replace this use of System.out or System.err by a logger.(Ìâ‘íúÿÿÿÿ
+T	java:S106Œ"9Replace this use of System.out or System.err by a logger.(Ìâ‘íúÿÿÿÿ
+W	java:S125”"<This block of commented-out lines of code should be removed.(÷ë²şÿÿÿÿ
+…
+java:S1130¨"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(»“ï
+D
+java:S1125¹"(Remove the unnecessary boolean literals.(™Ó´·ÿÿÿÿÿ
+t
+java:S2293c"YReplace the type specification in this constructor call with the diamond operator ("<>").(Æ¸“±øÿÿÿÿ
+[	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(è…İ‘ıÿÿÿÿ
+Y
+java:S2259"BA "NullPointerException" could be thrown; "null" is nullable here.(•…ş§
+Y
+java:S2259„"BA "NullPointerException" could be thrown; "null" is nullable here.(•…ş§
+b
+java:S2095~"GUse try-with-resources or close this "Statement" in a "finally" clause.(¼Õ–èüÿÿÿÿ
+b
+java:S2095e"GUse try-with-resources or close this "Statement" in a "finally" clause.(¼Õ–èüÿÿÿÿ
+b
+java:S2095t"GUse try-with-resources or close this "Statement" in a "finally" clause.(¼Õ–èüÿÿÿÿ
+c
+java:S2095‰"GUse try-with-resources or close this "Statement" in a "finally" clause.(¼Õ–èüÿÿÿÿ
