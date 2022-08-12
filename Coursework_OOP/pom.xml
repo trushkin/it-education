@@ -38,6 +38,13 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>10.2.0.jre17</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/mssql-jdbc-10.2.0.jre17.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
@@ -60,7 +67,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.coursework_oop/by.bsuir.coursework.sto.Main
+                            <mainClass>by.bsuir.coursework.sto.Main
                             </mainClass>
                         </configuration>
                     </execution>
