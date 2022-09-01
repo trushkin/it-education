@@ -1,6 +1,7 @@
-package by.bsuir.coursework.sto.models;
+package by.bsuir.coursework.sto.schedule;
 
-import by.bsuir.coursework.sto.dto.SchedulePrint;
+import by.bsuir.coursework.sto.database.DatabaseCheck;
+import by.bsuir.coursework.sto.stoProperties.Properties;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

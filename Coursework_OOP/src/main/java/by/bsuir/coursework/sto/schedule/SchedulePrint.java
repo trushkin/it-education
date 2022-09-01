@@ -1,4 +1,4 @@
-package by.bsuir.coursework.sto.dto;
+package by.bsuir.coursework.sto.schedule;
 
 import java.time.LocalDateTime;
 

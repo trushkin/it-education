@@ -1,4 +1,4 @@
-package by.bsuir.coursework.sto.models;
+package by.bsuir.coursework.sto.database;
 
 
 import java.sql.Connection;

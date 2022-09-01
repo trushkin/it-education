@@ -1,11 +1,10 @@
-package by.bsuir.coursework.sto.gui;
+package by.bsuir.coursework.sto.mainScreen;
 
-import by.bsuir.coursework.sto.models.Car;
-import by.bsuir.coursework.sto.models.Lift;
-import by.bsuir.coursework.sto.models.Properties;
-import by.bsuir.coursework.sto.models.Schedule;
-import by.bsuir.coursework.sto.dto.SchedulePrint;
-import by.bsuir.coursework.sto.dto.ScheduleRow;
+import by.bsuir.coursework.sto.car.Car;
+import by.bsuir.coursework.sto.lift.Lift;
+import by.bsuir.coursework.sto.stoProperties.Properties;
+import by.bsuir.coursework.sto.schedule.Schedule;
+import by.bsuir.coursework.sto.schedule.SchedulePrint;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +26,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
-public class ScheduleController implements Initializable {
+public class MainScreenController implements Initializable {
     public TableView<ScheduleRow> tvSchedule;
     @FXML
     private DatePicker dtCurrentDate;

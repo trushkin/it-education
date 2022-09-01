@@ -1,4 +1,4 @@
-package by.bsuir.coursework.sto.gui;
+package by.bsuir.coursework.sto.schedule;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,5 +1,6 @@
-package by.bsuir.coursework.sto.dto;
+package by.bsuir.coursework.sto.mainScreen;
 
+import by.bsuir.coursework.sto.schedule.SchedulePrint;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

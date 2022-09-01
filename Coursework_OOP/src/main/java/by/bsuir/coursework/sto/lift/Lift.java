@@ -1,5 +1,6 @@
-package by.bsuir.coursework.sto.models;
+package by.bsuir.coursework.sto.lift;
 
+import by.bsuir.coursework.sto.database.DatabaseCheck;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

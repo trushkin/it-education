@@ -1,8 +1,6 @@
-package by.bsuir.coursework.sto.gui;
+package by.bsuir.coursework.sto.car;
 
-import by.bsuir.coursework.sto.models.Car;
-import by.bsuir.coursework.sto.models.Client;
-import by.bsuir.coursework.sto.dto.CarRow;
+import by.bsuir.coursework.sto.client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.coursework.sto.gui.AddScheduleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.coursework.sto.schedule.AddScheduleController">
    <children>
       <ComboBox fx:id="cbClientName" layoutX="58.0" layoutY="40.0" onAction="#cbClientClick" prefWidth="150.0" />
       <ComboBox fx:id="cbClientCar" layoutX="329.0" layoutY="40.0" prefWidth="150.0" />

@@ -1,6 +1,6 @@
-package by.bsuir.coursework.sto.gui;
+package by.bsuir.coursework.sto.client;
 
-import by.bsuir.coursework.sto.models.Client;
+import by.bsuir.coursework.sto.client.Client;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

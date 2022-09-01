@@ -1,4 +1,4 @@
-package by.bsuir.coursework.sto.dto;
+package by.bsuir.coursework.sto.car;
 
 public class CarRow {
     private String stateNum;

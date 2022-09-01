@@ -1,6 +1,6 @@
 package by.bsuir.coursework.sto;
 
-import by.bsuir.coursework.sto.models.DatabaseCheck;
+import by.bsuir.coursework.sto.database.DatabaseCheck;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

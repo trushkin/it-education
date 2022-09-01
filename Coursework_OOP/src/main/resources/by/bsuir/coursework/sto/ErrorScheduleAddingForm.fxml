@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="124.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.coursework.sto.gui.ErrorScheduleAddingController">
+<AnchorPane prefHeight="124.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.coursework.sto.schedule.ErrorScheduleAddingController">
    <children>
       <Label layoutX="9.0" layoutY="43.0" text="Ошибка добавления записи! Желаемое время уже занято или не все поля заполнены!" textAlignment="JUSTIFY" textFill="RED" />
       <Text layoutX="139.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" />

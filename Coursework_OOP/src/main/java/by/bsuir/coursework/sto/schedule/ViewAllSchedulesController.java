@@ -1,9 +1,7 @@
-package by.bsuir.coursework.sto.gui;
+package by.bsuir.coursework.sto.schedule;
 
-import by.bsuir.coursework.sto.models.Car;
-import by.bsuir.coursework.sto.models.Client;
-import by.bsuir.coursework.sto.models.Schedule;
-import by.bsuir.coursework.sto.dto.SchedulePrint;
+import by.bsuir.coursework.sto.car.Car;
+import by.bsuir.coursework.sto.client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

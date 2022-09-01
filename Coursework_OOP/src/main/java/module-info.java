@@ -6,10 +6,18 @@ module com.example.coursework_oop {
 
     opens by.bsuir.coursework.sto to javafx.fxml;
     exports by.bsuir.coursework.sto;
-    exports by.bsuir.coursework.sto.models;
-    opens by.bsuir.coursework.sto.models to javafx.fxml;
-    exports by.bsuir.coursework.sto.gui;
-    opens by.bsuir.coursework.sto.gui to javafx.fxml;
-    exports by.bsuir.coursework.sto.dto;
-    opens by.bsuir.coursework.sto.dto to javafx.fxml;
+    exports by.bsuir.coursework.sto.car;
+    opens by.bsuir.coursework.sto.car to javafx.fxml;
+    exports by.bsuir.coursework.sto.lift;
+    opens by.bsuir.coursework.sto.lift to javafx.fxml;
+    exports by.bsuir.coursework.sto.client;
+    opens by.bsuir.coursework.sto.client to javafx.fxml;
+    exports by.bsuir.coursework.sto.database;
+    opens by.bsuir.coursework.sto.database to javafx.fxml;
+    exports by.bsuir.coursework.sto.schedule;
+    opens by.bsuir.coursework.sto.schedule to javafx.fxml;
+    exports by.bsuir.coursework.sto.mainScreen;
+    opens by.bsuir.coursework.sto.mainScreen to javafx.fxml;
+    exports by.bsuir.coursework.sto.stoProperties;
+    opens by.bsuir.coursework.sto.stoProperties to javafx.fxml;
 }
