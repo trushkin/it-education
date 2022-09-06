@@ -1,6 +1,6 @@
 package by.bsuir.coursework.sto;
 
-import by.bsuir.coursework.sto.database.DatabaseCheck;
+import by.bsuir.coursework.sto.application.DatabaseConnectionProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,6 +24,6 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
 
         launch();
-        DatabaseCheck.getConnection().close();
+        DatabaseConnectionProvider.getConnection().close();
     }
 }

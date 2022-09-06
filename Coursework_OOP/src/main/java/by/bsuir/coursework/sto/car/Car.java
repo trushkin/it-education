@@ -1,6 +1,6 @@
 package by.bsuir.coursework.sto.car;
 
-import by.bsuir.coursework.sto.database.DatabaseCheck;
+import by.bsuir.coursework.sto.application.DatabaseConnectionProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -87,7 +87,7 @@ public class Car {
         else
             selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, ClientID from Cars Where ClientID = '" + clientID + "'";
         ObservableList<Car> carList = FXCollections.observableArrayList();
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
             carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
@@ -99,7 +99,7 @@ public class Car {
 
     public static void addCar(String stateNum, String VIN, String brand, String model, int clientID) throws SQLException {
         String selectSql = "INSERT INTO Cars(StateNum, VIN, Brand, Model, ClientID) VALUES ('" + stateNum + "','" + VIN + "','" + brand + "','" + model + "','" + clientID + "')";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code == 1) {
             System.out.println("Запрос успешно выполнен!");
@@ -111,7 +111,7 @@ public class Car {
 
     public static void deleteCar(int carID) throws SQLException {
         String selectSql = "DELETE FROM Cars WHERE CarID =  '" + carID + "'";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code >= 1) {
             System.out.println("Запрос успешно выполнен!");
@@ -123,7 +123,7 @@ public class Car {
     public static ObservableList<CarRow> loadCarDetails() throws SQLException {
         ObservableList<CarRow> carList = FXCollections.observableArrayList();
         String selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, Cars.ClientID, FIO from Cars INNER JOIN Clients ON Cars.ClientID = Clients.ClientID";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
             carList.add(new CarRow(resultSet.getString("StateNum"), resultSet.getString("VIN"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getInt("CarID"), resultSet.getInt("ClientID"), resultSet.getString("FIO")));
@@ -133,7 +133,7 @@ public class Car {
 
     public static void updateCar(int carID, String stateNum, String VIN, String brand, String model, int clientID) throws SQLException {
         String selectSql = "UPDATE Cars SET StateNum = '" + stateNum + "', VIN = '" + VIN + "', Brand = '" + brand + "', Model = '" + model + "', ClientID = '" + clientID + "' WHERE CarID = '" + carID + "'";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code >= 1) {
             System.out.println("Запрос успешно выполнен!");
@@ -143,7 +143,7 @@ public class Car {
     public static List<Car> loadAllCars() throws SQLException {
         List<Car> carList = new ArrayList<>();
         String selectSql = "SELECT * from Cars";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
             carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getInt("CarID"), resultSet.getInt("ClientID")));

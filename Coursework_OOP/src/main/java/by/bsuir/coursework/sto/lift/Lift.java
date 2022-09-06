@@ -1,6 +1,6 @@
 package by.bsuir.coursework.sto.lift;
 
-import by.bsuir.coursework.sto.database.DatabaseCheck;
+import by.bsuir.coursework.sto.application.DatabaseConnectionProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -42,7 +42,7 @@ public class Lift {
     public static ObservableList<Lift> loadLifts() throws SQLException {
         ObservableList<Lift> liftList = FXCollections.observableArrayList();
         String selectSql = "SELECT Name, LiftID from Lifts";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
             liftList.add(new Lift(resultSet.getString(1), resultSet.getInt(2)));

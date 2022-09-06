@@ -1,7 +1,6 @@
 package by.bsuir.coursework.sto.schedule;
 
-import by.bsuir.coursework.sto.database.DatabaseCheck;
-import by.bsuir.coursework.sto.stoProperties.Properties;
+import by.bsuir.coursework.sto.application.DatabaseConnectionProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -99,7 +98,7 @@ public class Schedule {
     public static List<Schedule> loadSchedule() throws SQLException {
         List<Schedule> scheduleList = new ArrayList<Schedule>();
         String selectSql = "SELECT ScheduleID, ClientID, CarID, LiftID, StartDate, Duration, Comment, Mileage from Schedule";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
             scheduleList.add(new Schedule(resultSet.getInt("ScheduleID"), resultSet.getInt("ClientID"), resultSet.getInt("CarID"), resultSet.getInt("LiftID"), resultSet.getTimestamp("StartDate").toLocalDateTime(), resultSet.getInt("Duration"), resultSet.getString("Comment"), resultSet.getInt("Mileage")));
@@ -114,7 +113,7 @@ public class Schedule {
                 "\tinner join Cars on Schedule.CarID = Cars.CarID\n" +
                 "\tinner join Clients on Schedule.ClientID = Clients.ClientID\n" +
                 "\tinner join Lifts on Schedule.LiftID = Lifts.LiftID \n";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
             scheduleList.add(new SchedulePrint(resultSet.getString("StateNum"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getString("FIO"), resultSet.getInt("Mileage"), resultSet.getTimestamp("StartDate").toLocalDateTime(), resultSet.getInt("Duration"), resultSet.getInt("ScheduleID"), resultSet.getString("Name"), resultSet.getString("Comment")));
@@ -124,7 +123,7 @@ public class Schedule {
 
     public static void deleteSchedule(int scheduleID) throws SQLException {
         String selectSql = "DELETE FROM Schedule WHERE ScheduleID =  '" + scheduleID + "'";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code >= 1) {
             System.out.println("Запрос успешно выполнен!");
@@ -135,7 +134,7 @@ public class Schedule {
 
     public static void addSchedule(int clientID, int carID, int liftID, LocalDateTime startDate, int duration, String comment, int mileage) throws SQLException {
         String selectSql = "INSERT INTO Schedule(ClientID, CarID, LiftID, StartDate, Duration, Comment, Mileage) VALUES ('" + clientID + "','" + carID + "','" + liftID + "','" + Timestamp.valueOf(startDate) + "','" + duration + "','" + comment + "','" + mileage + "')";
-        Statement statement = DatabaseCheck.getConnection().createStatement();
+        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code == 1) {
             System.out.println("Запрос успешно выполнен!");

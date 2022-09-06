@@ -1,8 +1,8 @@
-package by.bsuir.coursework.sto.mainScreen;
+package by.bsuir.coursework.sto.main;
 
 import by.bsuir.coursework.sto.car.Car;
 import by.bsuir.coursework.sto.lift.Lift;
-import by.bsuir.coursework.sto.stoProperties.Properties;
+import by.bsuir.coursework.sto.schedule.Properties;
 import by.bsuir.coursework.sto.schedule.Schedule;
 import by.bsuir.coursework.sto.schedule.SchedulePrint;
 import javafx.collections.FXCollections;

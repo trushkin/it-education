@@ -1,4 +1,4 @@
-package by.bsuir.coursework.sto.mainScreen;
+package by.bsuir.coursework.sto.main;
 
 import by.bsuir.coursework.sto.schedule.SchedulePrint;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ScheduleRow {
+class ScheduleRow {
     private String time;
     Map<Integer, SchedulePrint> schedulePerLift = new HashMap<>();
 

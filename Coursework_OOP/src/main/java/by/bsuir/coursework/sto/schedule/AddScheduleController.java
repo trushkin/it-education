@@ -3,7 +3,6 @@ package by.bsuir.coursework.sto.schedule;
 import by.bsuir.coursework.sto.car.Car;
 import by.bsuir.coursework.sto.client.Client;
 import by.bsuir.coursework.sto.lift.Lift;
-import by.bsuir.coursework.sto.stoProperties.Properties;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;

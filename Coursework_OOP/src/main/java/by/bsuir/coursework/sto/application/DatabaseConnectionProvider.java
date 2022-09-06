@@ -1,4 +1,4 @@
-package by.bsuir.coursework.sto.database;
+package by.bsuir.coursework.sto.application;
 
 
 import java.sql.Connection;
@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class DatabaseCheck {
+public class DatabaseConnectionProvider {
     public static final String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=STO;user=sqldemo;password=1111;TrustServerCertificate=True";
     public static final String DB_Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static Connection connection;

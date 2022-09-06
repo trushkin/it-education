@@ -1,4 +1,4 @@
-package by.bsuir.coursework.sto.stoProperties;
+package by.bsuir.coursework.sto.schedule;
 
 
 import javafx.collections.FXCollections;
