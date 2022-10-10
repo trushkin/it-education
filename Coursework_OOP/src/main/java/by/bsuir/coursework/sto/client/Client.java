@@ -3,6 +3,8 @@ package by.bsuir.coursework.sto.client;
 import by.bsuir.coursework.sto.application.DatabaseConnectionProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +17,7 @@ public class Client {
     private String mobNum;
     private int clientID;
 
-
+    public static Logger logger = LogManager.getLogger();
     @Override
     public String toString() {
         return FIO;
@@ -58,7 +60,8 @@ public class Client {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
-            clientList.add(new Client(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3)));
+            clientList.add(new Client(resultSet.getString(1), resultSet.getString(2),
+                    resultSet.getInt(3)));
         }
         return clientList;
     }
@@ -69,7 +72,8 @@ public class Client {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
-            clientList.add(new Client(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3)));
+            clientList.add(new Client(resultSet.getString(1), resultSet.getString(2),
+                    resultSet.getInt(3)));
         }
         return clientList;
     }
@@ -95,7 +99,8 @@ public class Client {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code == 1) {
-            System.out.println("Запрос успешно выполнен!");
+           // System.out.println("Запрос успешно выполнен!");
+            logger.info("Client added successfully");
             return;
         }
         //throw null;
@@ -107,18 +112,21 @@ public class Client {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code >= 1) {
-            System.out.println("Запрос успешно выполнен!");
+            //System.out.println("Запрос успешно выполнен!");
+            logger.info("Client deleted successfully");
             return;
         }
        // throw null;
     }
 
     public static void updateClient(int clientID, String newFIO, String newMobNum) throws SQLException{
-        String selectSql = "UPDATE Clients SET FIO = '" + newFIO + "', MobNum = '" + newMobNum + "' WHERE ClientID = '" + clientID + "'";
+        String selectSql = "UPDATE Clients SET FIO = '" + newFIO + "', MobNum = '" + newMobNum + "' WHERE ClientID = '" +
+                clientID + "'";
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code >= 1) {
-            System.out.println("Запрос успешно выполнен!");
+            //System.out.println("Запрос успешно выполнен!");
+            logger.info("Client updated successfully");
             return;
         }
     }

@@ -2,6 +2,7 @@ module com.example.coursework_oop {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.apache.logging.log4j;
 
 
     opens by.bsuir.coursework.sto to javafx.fxml;

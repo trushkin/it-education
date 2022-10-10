@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -58,7 +60,7 @@ public class ViewAllSchedulesController implements Initializable {
     @FXML
     private TextArea taComment;
 
-
+    public static Logger logger = LogManager.getLogger();
     ObservableList<SchedulePrint> schedulesObservableList = FXCollections.observableArrayList();
 
     @Override
@@ -67,7 +69,8 @@ public class ViewAllSchedulesController implements Initializable {
             schedulesObservableList = Schedule.loadScheduleToPrint();
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+           // System.out.println("Ошибка SQL !");
+            logger.error("Schedule loading error");
             return;
         }
         displaySchedules(schedulesObservableList);
@@ -101,7 +104,6 @@ public class ViewAllSchedulesController implements Initializable {
         colFIO.setResizable(false);
         colFIO.setCellValueFactory(new PropertyValueFactory<SchedulePrint, String>("FIO"));
         colFIO.setStyle("-fx-alignment: center");
-
 
         colStateNum.setSortable(false);
         colStateNum.setResizable(false);
@@ -198,7 +200,8 @@ public class ViewAllSchedulesController implements Initializable {
             cbClientsFilter.setItems(Client.loadClientsInForm());
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+            // System.out.println("Ошибка SQL !");
+            logger.error("Loading clients in comboBox error");
             return;
         }
     }
@@ -211,7 +214,8 @@ public class ViewAllSchedulesController implements Initializable {
                 cbCarFilter.setItems(Car.loadCarsInCb(-1));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+//            System.out.println("Ошибка SQL !");
+            logger.error("Loading client's cars in comboBox error");
             return;
         }
     }
@@ -237,7 +241,8 @@ public class ViewAllSchedulesController implements Initializable {
                 schedulesObservableList = Schedule.loadScheduleToPrint();
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-                System.out.println("Ошибка SQL !");
+                //System.out.println("Ошибка SQL !");
+                logger.error("Deleting selected schedule error");
                 return;
             }
             cbClientsFilter.setValue(null);

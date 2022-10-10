@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +61,7 @@ public class AddScheduleController implements Initializable {
     @FXML
     private TextField tfMileage;
 
-
+    public static Logger logger = LogManager.getLogger();
     @FXML
     void openCarForm(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -101,7 +103,8 @@ public class AddScheduleController implements Initializable {
             cbClientName.setItems(Client.loadClientsInForm());
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+            //System.out.println("Ошибка SQL !");
+            logger.error("Loading clients in comboBox error");
             return;
         }
     }
@@ -112,7 +115,8 @@ public class AddScheduleController implements Initializable {
                 cbClientCar.setItems(Car.loadCarsInCb(cbClientName.getValue().getClientID()));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+            //System.out.println("Ошибка SQL !");
+            logger.error("Loading client's cars in comboBox error");
             return;
         }
     }
@@ -122,7 +126,8 @@ public class AddScheduleController implements Initializable {
             cbLift.setItems(Lift.loadLifts());
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+            //System.out.println("Ошибка SQL !");
+            logger.error("Loading lifts in comboBox error");
             return;
         }
     }
@@ -145,7 +150,8 @@ public class AddScheduleController implements Initializable {
                                 spStartHour.getValue(), spStartMin.getValue()), spDuration.getValue(), taComment.getText(), Integer.parseInt(tfMileage.getText()));
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-                System.out.println("Ошибка SQL !");
+                //System.out.println("Ошибка SQL !");
+                logger.error("Creating schedule error");
             }
             Stage stage = (Stage) btnScheduleInsert.getScene().getWindow();
             stage.close();

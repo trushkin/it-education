@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -63,7 +65,7 @@ public class AddCarController implements Initializable {
 
     @FXML
     private Label lblErrorCar;
-
+    public static Logger logger = LogManager.getLogger();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,7 +79,8 @@ public class AddCarController implements Initializable {
             carRowObservableList = Car.loadCarDetails();
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+            //System.out.println("Ошибка SQL !");
+            logger.error("Display cars error");
             return;
         }
         colCarID.setSortable(false);
@@ -118,19 +121,23 @@ public class AddCarController implements Initializable {
             cbClientName.setItems(Client.loadClientsInForm());
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+           // System.out.println("Ошибка SQL !");
+            logger.error("Loading clients error");
             return;
         }
     }
 
 
     public void insertCarBtnClick(ActionEvent actionEvent) {
-        if (tfStateNum.getText() != "" && tfModel.getText() != "" && tfBrand.getText() != "" && tfVIN.getText() != "" && cbClientName.getValue() != null) {
+        if (tfStateNum.getText() != "" && tfModel.getText() != "" && tfBrand.getText() != "" && tfVIN.getText() != "" &&
+                cbClientName.getValue() != null) {
             try {
-                Car.addCar(tfStateNum.getText(), tfVIN.getText(), tfBrand.getText(), tfModel.getText(), cbClientName.getValue().getClientID());
+                Car.addCar(tfStateNum.getText(), tfVIN.getText(), tfBrand.getText(), tfModel.getText(),
+                        cbClientName.getValue().getClientID());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-                System.out.println("Ошибка SQL !");
+                //System.out.println("Ошибка SQL !");
+                logger.error("Inserting car error");
             }
             tfStateNum.clear();
             tfVIN.clear();
@@ -143,13 +150,16 @@ public class AddCarController implements Initializable {
     }
 
     public void updateCarBtnClick(ActionEvent actionEvent) {
-        if ((tvCars.getSelectionModel().getSelectedItem() != null) && (tfStateNum.getText() != "" && tfModel.getText() != "" && tfBrand.getText() != "" && tfVIN.getText() != "" && cbClientName.getValue() != null)) {
+        if ((tvCars.getSelectionModel().getSelectedItem() != null) && (tfStateNum.getText() != "" && tfModel.getText() != "" &&
+                tfBrand.getText() != "" && tfVIN.getText() != "" && cbClientName.getValue() != null)) {
             CarRow selectedCar = tvCars.getSelectionModel().getSelectedItem();
             try {
-                Car.updateCar(selectedCar.getCarID(), tfStateNum.getText(), tfVIN.getText(), tfBrand.getText(), tfModel.getText(), cbClientName.getValue().getClientID());
+                Car.updateCar(selectedCar.getCarID(), tfStateNum.getText(), tfVIN.getText(), tfBrand.getText(), tfModel.getText(),
+                        cbClientName.getValue().getClientID());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-                System.out.println("Ошибка SQL !");
+                //System.out.println("Ошибка SQL !");
+                logger.error("Updating car error");
             }
             tfStateNum.clear();
             tfVIN.clear();
@@ -162,13 +172,15 @@ public class AddCarController implements Initializable {
     }
 
     public void deleteCarBtnClick(ActionEvent actionEvent) {
-        if ((tvCars.getSelectionModel().getSelectedItem() != null) && (tfStateNum.getText() != "" && tfModel.getText() != "" && tfBrand.getText() != "" && tfVIN.getText() != "" && cbClientName.getValue() != null)) {
+        if ((tvCars.getSelectionModel().getSelectedItem() != null) && (tfStateNum.getText() != "" && tfModel.getText() != "" &&
+                tfBrand.getText() != "" && tfVIN.getText() != "" && cbClientName.getValue() != null)) {
             CarRow selectedCar = tvCars.getSelectionModel().getSelectedItem();
             try {
                 Car.deleteCar(selectedCar.getCarID());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-                System.out.println("Ошибка SQL !");
+               // System.out.println("Ошибка SQL !");
+                logger.error("Deleting car error");
             }
             tfStateNum.clear();
             tfVIN.clear();

@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,7 +47,7 @@ public class AddClientController implements Initializable {
     @FXML
     private Label lblErrorClient;
 
-
+    public static Logger logger = LogManager.getLogger();
     ObservableList<Client> clientObservableList = FXCollections.observableArrayList();
 
     @Override
@@ -68,7 +70,8 @@ public class AddClientController implements Initializable {
             clientObservableList = Client.loadClientsInForm();
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            System.out.println("Ошибка SQL !");
+            //System.out.println("Ошибка SQL !");
+            logger.error("Displaying clients error");
             return;
         }
 
@@ -98,7 +101,8 @@ public class AddClientController implements Initializable {
                 Client.addClient(tfFIO.getText(), tfMobNum.getText());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-                System.out.println("Ошибка SQL !");
+                //System.out.println("Ошибка SQL !");
+                logger.error("Inserting client error");
             }
             tfFIO.clear();
             tfMobNum.clear();
@@ -122,7 +126,8 @@ public class AddClientController implements Initializable {
                 Client.deleteClient(selectedClient.getClientID());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-                System.out.println("Ошибка SQL !");
+               // System.out.println("Ошибка SQL !");
+                logger.error("Deleting client error");
             }
             tfFIO.clear();
             tfMobNum.clear();
@@ -138,7 +143,8 @@ public class AddClientController implements Initializable {
                 Client.updateClient(selectedClient.getClientID(), tfFIO.getText(), tfMobNum.getText());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-                System.out.println("Ошибка SQL !");
+               // System.out.println("Ошибка SQL !");
+                logger.error("Updating client error");
             }
             tfFIO.clear();
             tfMobNum.clear();

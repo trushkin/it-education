@@ -3,6 +3,8 @@ package by.bsuir.coursework.sto.car;
 import by.bsuir.coursework.sto.application.DatabaseConnectionProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +20,7 @@ public class Car {
     private int carID;
     private int clientID;
 
+    public static Logger logger = LogManager.getLogger();
 
     public Car(String stateNum, String VIN, String brand, String model, int carID, int clientID) {
         this.stateNum = stateNum;
@@ -90,7 +93,9 @@ public class Car {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
-            carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
+            carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"),
+                    resultSet.getString("Brand"), resultSet.getString("Model"),
+                    resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
 
         }
         return carList;
@@ -98,11 +103,13 @@ public class Car {
 
 
     public static void addCar(String stateNum, String VIN, String brand, String model, int clientID) throws SQLException {
-        String selectSql = "INSERT INTO Cars(StateNum, VIN, Brand, Model, ClientID) VALUES ('" + stateNum + "','" + VIN + "','" + brand + "','" + model + "','" + clientID + "')";
+        String selectSql = "INSERT INTO Cars(StateNum, VIN, Brand, Model, ClientID) VALUES ('" + stateNum + "','"
+                + VIN + "','" + brand + "','" + model + "','" + clientID + "')";
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code == 1) {
-            System.out.println("Запрос успешно выполнен!");
+            //System.out.println("Запрос успешно выполнен!");
+            logger.info("Car added successfully");
             return;
         }
         throw null;
@@ -114,7 +121,8 @@ public class Car {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code >= 1) {
-            System.out.println("Запрос успешно выполнен!");
+            //System.out.println("Запрос успешно выполнен!");
+            logger.info("Car deleted successfully");
             return;
         }
         throw null;
@@ -126,17 +134,22 @@ public class Car {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
-            carList.add(new CarRow(resultSet.getString("StateNum"), resultSet.getString("VIN"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getInt("CarID"), resultSet.getInt("ClientID"), resultSet.getString("FIO")));
+            carList.add(new CarRow(resultSet.getString("StateNum"), resultSet.getString("VIN"),
+                    resultSet.getString("Brand"), resultSet.getString("Model"),
+                    resultSet.getInt("CarID"), resultSet.getInt("ClientID"),
+                    resultSet.getString("FIO")));
         }
         return carList;
     }
 
     public static void updateCar(int carID, String stateNum, String VIN, String brand, String model, int clientID) throws SQLException {
-        String selectSql = "UPDATE Cars SET StateNum = '" + stateNum + "', VIN = '" + VIN + "', Brand = '" + brand + "', Model = '" + model + "', ClientID = '" + clientID + "' WHERE CarID = '" + carID + "'";
+        String selectSql = "UPDATE Cars SET StateNum = '" + stateNum + "', VIN = '" + VIN + "', Brand = '" +
+                brand + "', Model = '" + model + "', ClientID = '" + clientID + "' WHERE CarID = '" + carID + "'";
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code >= 1) {
-            System.out.println("Запрос успешно выполнен!");
+            //System.out.println("Запрос успешно выполнен!");
+            logger.info("Car updated successfully");
             return;
         }
     }
@@ -146,7 +159,9 @@ public class Car {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(selectSql);
         while (resultSet.next()) {
-            carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
+            carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"),
+                    resultSet.getString("Brand"), resultSet.getString("Model"),
+                    resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
         }
         return carList;
     }

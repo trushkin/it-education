@@ -17,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +44,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button btnViewAllSchedules;
 
-
+    public static Logger logger = LogManager.getLogger();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dtCurrentDate.setValue(LocalDate.now());
@@ -61,7 +63,8 @@ public class MainScreenController implements Initializable {
                 //ScheduleRow row = (ScheduleRow) getTableRow().getItem();
                 setText(item);
                 if (item != null && item.equals("<свободно>")) {
-                    setStyle("-fx-background-color: green; -fx-alignment: center; -fx-border-width: 1px; -fx-border-color: #AAAAAA");
+                    setStyle("-fx-background-color: green; -fx-alignment: center; -fx-border-width: 1px;" +
+                            " -fx-border-color: #AAAAAA");
                 } else {
                     setStyle("-fx-background-color: lightgray; -fx-alignment: center");
                 }
@@ -77,7 +80,8 @@ public class MainScreenController implements Initializable {
         try {
             scheduleRowObservableList.addAll(getScheduleRows());
         } catch (SQLException e) {
-            System.out.println("Ошибка SQL !");
+            //System.out.println("Ошибка SQL !");
+            logger.error("Inserting all schedules in a list error");
             e.printStackTrace();
 
         }
@@ -104,7 +108,8 @@ public class MainScreenController implements Initializable {
                 liftColumn.setSortable(false);
             }
         } catch (SQLException e) {
-            System.out.println("Ошибка SQL !");
+            //System.out.println("Ошибка SQL !");
+            logger.error("Lift columns filling error");
             e.printStackTrace();
         }
     }
@@ -202,7 +207,9 @@ public class MainScreenController implements Initializable {
         for (LocalTime t : Properties.getTimeline()) {
             ScheduleRow curRow = new ScheduleRow(t.getHour() + ":" + (t.getMinute() == 0 ? "00" : "30"));
             for (Lift curLift : lifts) {
-                Schedule s = Schedule.findSchedule(LocalDateTime.of(dtCurrentDate.getValue().getYear(), dtCurrentDate.getValue().getMonthValue(), dtCurrentDate.getValue().getDayOfMonth(), t.getHour(), t.getMinute()), 0.5, scheduleList, curLift.getLiftID());
+                Schedule s = Schedule.findSchedule(LocalDateTime.of(dtCurrentDate.getValue().getYear(),
+                        dtCurrentDate.getValue().getMonthValue(), dtCurrentDate.getValue().getDayOfMonth(), t.getHour(),
+                        t.getMinute()), 0.5, scheduleList, curLift.getLiftID());
                 if (s != null) {
                     Car c = Car.getCarByID(s.getCarID(), carList);
                     SchedulePrint cell = new SchedulePrint(c.getStateNum(), c.getBrand(), c.getModel(), s.getScheduleID());
@@ -231,7 +238,8 @@ public class MainScreenController implements Initializable {
             scheduleRowObservableList.addAll(getScheduleRows());
 
         } catch (SQLException e) {
-            System.out.println("Ошибка SQL !");
+            //System.out.println("Ошибка SQL !");
+            logger.error("Updating main screen after choosing date error");
             e.printStackTrace();
 
         }

@@ -3,6 +3,8 @@ package by.bsuir.coursework.sto.schedule;
 import by.bsuir.coursework.sto.application.DatabaseConnectionProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -19,6 +21,7 @@ public class Schedule {
     private String comment;
     private int mileage;
 
+    public static Logger logger = LogManager.getLogger();
 
     public Schedule(int scheduleID, int clientID, int carID, int liftID, LocalDateTime startDate, int duration, String comment, int mileage) {
         this.scheduleID = scheduleID;
@@ -126,7 +129,8 @@ public class Schedule {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code >= 1) {
-            System.out.println("Запрос успешно выполнен!");
+            //System.out.println("Запрос успешно выполнен!");
+            logger.info("Schedule deleted successfully");
             return;
         }
         throw null;
@@ -137,7 +141,8 @@ public class Schedule {
         Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
         int code = statement.executeUpdate(selectSql);
         if (code == 1) {
-            System.out.println("Запрос успешно выполнен!");
+//            System.out.println("Запрос успешно выполнен!");
+            logger.info("Schedule added successfully");
             return;
         }
         throw null;
