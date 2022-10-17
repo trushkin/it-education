@@ -18,5 +18,5 @@ module com.example.coursework_oop {
     exports by.bsuir.coursework.sto.schedule;
     opens by.bsuir.coursework.sto.schedule to javafx.fxml;
     exports by.bsuir.coursework.sto.main;
-    opens by.bsuir.coursework.sto.main to javafx.fxml;
+    opens by.bsuir.coursework.sto.main to javafx.fxml, javafx.controls;
 }
