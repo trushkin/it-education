@@ -101,8 +101,8 @@ public class Schedule {
     public static List<Schedule> loadSchedule() throws SQLException {
         List<Schedule> scheduleList = new ArrayList<Schedule>();
         String selectSql = "SELECT ScheduleID, ClientID, CarID, LiftID, StartDate, Duration, Comment, Mileage from Schedule";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             scheduleList.add(new Schedule(resultSet.getInt("ScheduleID"), resultSet.getInt("ClientID"), resultSet.getInt("CarID"), resultSet.getInt("LiftID"), resultSet.getTimestamp("StartDate").toLocalDateTime(), resultSet.getInt("Duration"), resultSet.getString("Comment"), resultSet.getInt("Mileage")));
 
@@ -110,14 +110,14 @@ public class Schedule {
         return scheduleList;
     }
 
-    public static ObservableList<SchedulePrint> loadScheduleToPrint() throws SQLException {
-        ObservableList<SchedulePrint> scheduleList = FXCollections.observableArrayList();
+    public static ArrayList<SchedulePrint> loadScheduleToPrint() throws SQLException {
+        ArrayList<SchedulePrint> scheduleList = new ArrayList<SchedulePrint>();
         String selectSql = "select Lifts.Name, Cars.StateNum, Cars.Brand, Cars.Model, Clients.FIO, Schedule.Mileage, Schedule.StartDate, Schedule.Duration, Schedule.ScheduleID, Schedule.Comment from Schedule\n" +
                 "\tinner join Cars on Schedule.CarID = Cars.CarID\n" +
                 "\tinner join Clients on Schedule.ClientID = Clients.ClientID\n" +
                 "\tinner join Lifts on Schedule.LiftID = Lifts.LiftID \n";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             scheduleList.add(new SchedulePrint(resultSet.getString("StateNum"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getString("FIO"), resultSet.getInt("Mileage"), resultSet.getTimestamp("StartDate").toLocalDateTime(), resultSet.getInt("Duration"), resultSet.getInt("ScheduleID"), resultSet.getString("Name"), resultSet.getString("Comment")));
         }
@@ -126,10 +126,9 @@ public class Schedule {
 
     public static void deleteSchedule(int scheduleID) throws SQLException {
         String selectSql = "DELETE FROM Schedule WHERE ScheduleID =  '" + scheduleID + "'";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        int code = statement.executeUpdate(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        int code = statement.executeUpdate();
         if (code >= 1) {
-            //System.out.println("Запрос успешно выполнен!");
             logger.info("Schedule deleted successfully");
             return;
         }
@@ -138,8 +137,8 @@ public class Schedule {
 
     public static void addSchedule(int clientID, int carID, int liftID, LocalDateTime startDate, int duration, String comment, int mileage) throws SQLException {
         String selectSql = "INSERT INTO Schedule(ClientID, CarID, LiftID, StartDate, Duration, Comment, Mileage) VALUES ('" + clientID + "','" + carID + "','" + liftID + "','" + Timestamp.valueOf(startDate) + "','" + duration + "','" + comment + "','" + mileage + "')";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        int code = statement.executeUpdate(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        int code = statement.executeUpdate();
         if (code == 1) {
 //            System.out.println("Запрос успешно выполнен!");
             logger.info("Schedule added successfully");

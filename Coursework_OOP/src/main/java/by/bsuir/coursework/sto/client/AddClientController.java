@@ -67,7 +67,7 @@ public class AddClientController implements Initializable {
 
     public void displayClients() {
         try {
-            clientObservableList = Client.loadClientsInForm();
+            clientObservableList = FXCollections.observableArrayList(Client.loadClientsInForm());
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
             //System.out.println("Ошибка SQL !");

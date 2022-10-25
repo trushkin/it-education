@@ -66,7 +66,7 @@ public class ViewAllSchedulesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            schedulesObservableList = Schedule.loadScheduleToPrint();
+            schedulesObservableList = FXCollections.observableArrayList(Schedule.loadScheduleToPrint());
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
            // System.out.println("Ошибка SQL !");
@@ -197,7 +197,7 @@ public class ViewAllSchedulesController implements Initializable {
 
     public void loadClientCB() {
         try {
-            cbClientsFilter.setItems(Client.loadClientsInForm());
+            cbClientsFilter.setItems(FXCollections.observableArrayList(Client.loadClientsInForm()));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
             // System.out.println("Ошибка SQL !");
@@ -209,9 +209,9 @@ public class ViewAllSchedulesController implements Initializable {
     public void loadCarsCB() {
         try {
             if ((cbClientsFilter.getValue()) != null)
-                cbCarFilter.setItems(Car.loadCarsInCb(cbClientsFilter.getValue().getClientID()));
+                cbCarFilter.setItems(FXCollections.observableArrayList( Car.loadCarsInCb(cbClientsFilter.getValue().getClientID())));
             else
-                cbCarFilter.setItems(Car.loadCarsInCb(-1));
+                cbCarFilter.setItems(FXCollections.observableArrayList( Car.loadCarsInCb(-1)));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
 //            System.out.println("Ошибка SQL !");
@@ -238,7 +238,7 @@ public class ViewAllSchedulesController implements Initializable {
         if (tvSchedules.getSelectionModel().getSelectedItem() != null) {
             Schedule.deleteSchedule(tvSchedules.getSelectionModel().getSelectedItem().getScheduleID());
             try {
-                schedulesObservableList = Schedule.loadScheduleToPrint();
+                schedulesObservableList = FXCollections.observableArrayList(Schedule.loadScheduleToPrint());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
                 //System.out.println("Ошибка SQL !");

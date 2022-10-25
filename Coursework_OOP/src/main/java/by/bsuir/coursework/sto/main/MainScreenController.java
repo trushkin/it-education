@@ -201,7 +201,7 @@ public class MainScreenController implements Initializable {
     private List<ScheduleRow> getScheduleRows() throws SQLException {
         //load all schedules from DB
         List<Schedule> scheduleList = Schedule.loadSchedule();
-        ObservableList<Lift> lifts = Lift.loadLifts();
+        List<Lift> lifts = Lift.loadLifts();
         List<Car> carList = Car.loadAllCars();
         List<ScheduleRow> timeline = new ArrayList();
         for (LocalTime t : Properties.getTimeline()) {

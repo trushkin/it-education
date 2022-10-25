@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -81,34 +82,33 @@ public class Car {
     }
 
 
-    public static ObservableList<Car> loadCarsInCb(int clientID) throws SQLException {
-        String selectSql;
-        if(clientID == -1)
-        {
-            selectSql = "SELECT * from Cars";
-        }
-        else
-            selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, ClientID from Cars Where ClientID = '" + clientID + "'";
-        ObservableList<Car> carList = FXCollections.observableArrayList();
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(selectSql);
-        while (resultSet.next()) {
-            carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"),
-                    resultSet.getString("Brand"), resultSet.getString("Model"),
-                    resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
-
-        }
-        return carList;
+public static ArrayList<Car> loadCarsInCb(int clientID) throws SQLException {
+    String selectSql;
+    if(clientID == -1)
+    {
+        selectSql = "SELECT * from Cars";
     }
+    else
+        selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, ClientID from Cars Where ClientID = '" + clientID + "'";
+    ArrayList<Car> carList = new ArrayList<Car>();
+    PreparedStatement preparedStatement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+    ResultSet resultSet = preparedStatement.executeQuery();
+    while (resultSet.next()) {
+        carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"),
+                resultSet.getString("Brand"), resultSet.getString("Model"),
+                resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
 
+    }
+    System.out.println(carList.get(0).brand);
+    return carList;
+}
 
     public static void addCar(String stateNum, String VIN, String brand, String model, int clientID) throws SQLException {
         String selectSql = "INSERT INTO Cars(StateNum, VIN, Brand, Model, ClientID) VALUES ('" + stateNum + "','"
                 + VIN + "','" + brand + "','" + model + "','" + clientID + "')";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        int code = statement.executeUpdate(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        int code = statement.executeUpdate();
         if (code == 1) {
-            //System.out.println("Запрос успешно выполнен!");
             logger.info("Car added successfully");
             return;
         }
@@ -118,21 +118,20 @@ public class Car {
 
     public static void deleteCar(int carID) throws SQLException {
         String selectSql = "DELETE FROM Cars WHERE CarID =  '" + carID + "'";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        int code = statement.executeUpdate(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        int code = statement.executeUpdate();
         if (code >= 1) {
-            //System.out.println("Запрос успешно выполнен!");
             logger.info("Car deleted successfully");
             return;
         }
         throw null;
     }
 
-    public static ObservableList<CarRow> loadCarDetails() throws SQLException {
-        ObservableList<CarRow> carList = FXCollections.observableArrayList();
+    public static ArrayList<CarRow> loadCarDetails() throws SQLException {
+        ArrayList<CarRow> carList = new ArrayList<CarRow>();
         String selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, Cars.ClientID, FIO from Cars INNER JOIN Clients ON Cars.ClientID = Clients.ClientID";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             carList.add(new CarRow(resultSet.getString("StateNum"), resultSet.getString("VIN"),
                     resultSet.getString("Brand"), resultSet.getString("Model"),
@@ -145,10 +144,9 @@ public class Car {
     public static void updateCar(int carID, String stateNum, String VIN, String brand, String model, int clientID) throws SQLException {
         String selectSql = "UPDATE Cars SET StateNum = '" + stateNum + "', VIN = '" + VIN + "', Brand = '" +
                 brand + "', Model = '" + model + "', ClientID = '" + clientID + "' WHERE CarID = '" + carID + "'";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        int code = statement.executeUpdate(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        int code = statement.executeUpdate();
         if (code >= 1) {
-            //System.out.println("Запрос успешно выполнен!");
             logger.info("Car updated successfully");
             return;
         }
@@ -156,8 +154,8 @@ public class Car {
     public static List<Car> loadAllCars() throws SQLException {
         List<Car> carList = new ArrayList<>();
         String selectSql = "SELECT * from Cars";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"),
                     resultSet.getString("Brand"), resultSet.getString("Model"),

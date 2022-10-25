@@ -4,9 +4,11 @@ import by.bsuir.coursework.sto.application.DatabaseConnectionProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class Lift {
@@ -39,11 +41,11 @@ public class Lift {
         return name;
     }
 
-    public static ObservableList<Lift> loadLifts() throws SQLException {
-        ObservableList<Lift> liftList = FXCollections.observableArrayList();
+    public static ArrayList<Lift> loadLifts() throws SQLException {
+       ArrayList<Lift> liftList = new ArrayList<Lift>();
         String selectSql = "SELECT Name, LiftID from Lifts";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             liftList.add(new Lift(resultSet.getString(1), resultSet.getInt(2)));
         }

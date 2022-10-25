@@ -5,6 +5,8 @@ import by.bsuir.coursework.sto.client.Client;
 import by.bsuir.coursework.sto.lift.Lift;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -100,7 +102,7 @@ public class AddScheduleController implements Initializable {
 
     public void loadClientCB() {
         try {
-            cbClientName.setItems(Client.loadClientsInForm());
+            cbClientName.setItems(FXCollections.observableArrayList(Client.loadClientsInForm()));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
             //System.out.println("Ошибка SQL !");
@@ -112,7 +114,7 @@ public class AddScheduleController implements Initializable {
     public void loadClientCarsCB() {
         try {
             if ((cbClientName.getValue()) != null)
-                cbClientCar.setItems(Car.loadCarsInCb(cbClientName.getValue().getClientID()));
+                cbClientCar.setItems(FXCollections.observableArrayList(Car.loadCarsInCb(cbClientName.getValue().getClientID())));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
             //System.out.println("Ошибка SQL !");
@@ -123,10 +125,9 @@ public class AddScheduleController implements Initializable {
 
     public void loadLiftsCB() {
         try {
-            cbLift.setItems(Lift.loadLifts());
+            cbLift.setItems(FXCollections.observableArrayList(Lift.loadLifts()));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-            //System.out.println("Ошибка SQL !");
             logger.error("Loading lifts in comboBox error");
             return;
         }

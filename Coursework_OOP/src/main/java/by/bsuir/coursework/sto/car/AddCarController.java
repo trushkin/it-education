@@ -76,7 +76,7 @@ public class AddCarController implements Initializable {
     public void displayCarRows() {
         ObservableList<CarRow> carRowObservableList = FXCollections.observableArrayList();
         try {
-            carRowObservableList = Car.loadCarDetails();
+            carRowObservableList = FXCollections.observableArrayList((Car.loadCarDetails()));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
             //System.out.println("Ошибка SQL !");
@@ -118,7 +118,7 @@ public class AddCarController implements Initializable {
 
     public void loadClientCB() {
         try {
-            cbClientName.setItems(Client.loadClientsInForm());
+            cbClientName.setItems(FXCollections.observableArrayList(Client.loadClientsInForm()));
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
            // System.out.println("Ошибка SQL !");

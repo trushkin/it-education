@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,8 +58,8 @@ public class Client {
     public static List<Client> loadClientsInConsole() throws SQLException {
         List<Client> clientList = new ArrayList<Client>();
         String selectSql = "SELECT FIO, MobNum, ClientID from Clients";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             clientList.add(new Client(resultSet.getString(1), resultSet.getString(2),
                     resultSet.getInt(3)));
@@ -66,11 +67,11 @@ public class Client {
         return clientList;
     }
 
-    public static ObservableList<Client> loadClientsInForm() throws SQLException {
-        ObservableList<Client> clientList = FXCollections.observableArrayList();
+    public static ArrayList<Client> loadClientsInForm() throws SQLException {
+        ArrayList<Client> clientList = new ArrayList<Client>();
         String selectSql = "SELECT FIO, MobNum, ClientID from Clients";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             clientList.add(new Client(resultSet.getString(1), resultSet.getString(2),
                     resultSet.getInt(3)));
@@ -80,52 +81,33 @@ public class Client {
 
 
     public static void addClient(String FIO, String mobNum) throws SQLException {
-//        List<Client> clientList = new ArrayList<Client>();
-//        try {
-//            clientList = Client.loadClients();
-//        } catch (SQLException e) {
-//            e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-//            System.out.println("Ошибка SQL !");
-//            return;
-//        }
-//        int ID = 0;
-//        if (!(clientList.isEmpty())) {
-//            for (Client temp : clientList) {
-//                if (ID <= temp.clientID)
-//                    ID = temp.clientID + 1;
-//            }
-//        }
+
         String  selectSql = "INSERT INTO Clients VALUES ('" + FIO + "','" + mobNum + "')";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        int code = statement.executeUpdate(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        int code = statement.executeUpdate();
         if (code == 1) {
-           // System.out.println("Запрос успешно выполнен!");
             logger.info("Client added successfully");
             return;
         }
-        //throw null;
 
     }
 
     public static void deleteClient(int clientID) throws SQLException{
         String selectSql = "DELETE FROM Clients WHERE ClientID =  '" + clientID + "'";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        int code = statement.executeUpdate(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        int code = statement.executeUpdate();
         if (code >= 1) {
-            //System.out.println("Запрос успешно выполнен!");
             logger.info("Client deleted successfully");
             return;
         }
-       // throw null;
     }
 
     public static void updateClient(int clientID, String newFIO, String newMobNum) throws SQLException{
         String selectSql = "UPDATE Clients SET FIO = '" + newFIO + "', MobNum = '" + newMobNum + "' WHERE ClientID = '" +
                 clientID + "'";
-        Statement statement = DatabaseConnectionProvider.getConnection().createStatement();
-        int code = statement.executeUpdate(selectSql);
+        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        int code = statement.executeUpdate();
         if (code >= 1) {
-            //System.out.println("Запрос успешно выполнен!");
             logger.info("Client updated successfully");
             return;
         }
