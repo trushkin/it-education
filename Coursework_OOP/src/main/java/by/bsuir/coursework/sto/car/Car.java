@@ -21,12 +21,20 @@ public class Car {
     private int carID;
     private int clientID;
 
-    public static Logger logger = LogManager.getLogger();
+    public static final Logger logger;// = LogManager.getLogger();
+
+    static {
+        logger = LogManager.getLogger();
+    }
+    {
+        this.brand = "Toyota"; //Ваня - тойота, я - лексус
+    }
 
     public Car(String stateNum, String VIN, String brand, String model, int carID, int clientID) {
         this.stateNum = stateNum;
         this.VIN = VIN;
-        this.brand = brand;
+        //this.brand = brand;
+        this.brand = "lexus";
         this.model = model;
         this.carID = carID;
         this.clientID = clientID;
@@ -82,26 +90,23 @@ public class Car {
     }
 
 
-public static ArrayList<Car> loadCarsInCb(int clientID) throws SQLException {
-    String selectSql;
-    if(clientID == -1)
-    {
-        selectSql = "SELECT * from Cars";
-    }
-    else
-        selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, ClientID from Cars Where ClientID = '" + clientID + "'";
-    ArrayList<Car> carList = new ArrayList<Car>();
-    PreparedStatement preparedStatement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
-    ResultSet resultSet = preparedStatement.executeQuery();
-    while (resultSet.next()) {
-        carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"),
-                resultSet.getString("Brand"), resultSet.getString("Model"),
-                resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
+    public static List<Car> loadCarsInCb(int clientID) throws SQLException {
+        String selectSql;
+        if (clientID == -1) {
+            selectSql = "SELECT * from Cars";
+        } else
+            selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, ClientID from Cars Where ClientID = '" + clientID + "'";
+        List<Car> carList = new ArrayList<>();
+        PreparedStatement preparedStatement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            carList.add(new Car(resultSet.getString("StateNum"), resultSet.getString("VIN"),
+                    resultSet.getString("Brand"), resultSet.getString("Model"),
+                    resultSet.getInt("CarID"), resultSet.getInt("ClientID")));
 
+        }
+        return carList;
     }
-    System.out.println(carList.get(0).brand);
-    return carList;
-}
 
     public static void addCar(String stateNum, String VIN, String brand, String model, int clientID) throws SQLException {
         String selectSql = "INSERT INTO Cars(StateNum, VIN, Brand, Model, ClientID) VALUES ('" + stateNum + "','"
@@ -151,6 +156,7 @@ public static ArrayList<Car> loadCarsInCb(int clientID) throws SQLException {
             return;
         }
     }
+
     public static List<Car> loadAllCars() throws SQLException {
         List<Car> carList = new ArrayList<>();
         String selectSql = "SELECT * from Cars";
@@ -165,8 +171,8 @@ public static ArrayList<Car> loadCarsInCb(int clientID) throws SQLException {
     }
 
     public static Car getCarByID(int carID, List<Car> carList) throws SQLException {
-        for (Car temp: carList) {
-            if(temp.getCarID() == carID)
+        for (Car temp : carList) {
+            if (temp.getCarID() == carID)
                 return temp;
         }
         return null;
