@@ -14,25 +14,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    private String FIO;
+    // private String FIO;
+    private String name;
+    private String surname;
+    private String patronymic;
     private String mobNum;
     private int clientID;
 
+    public Client(String name, String surname, String patronymic, String mobNum, int clientID) {
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+        this.mobNum = mobNum;
+        this.clientID = clientID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+
     public static Logger logger = LogManager.getLogger();
+
     @Override
     public String toString() {
-        return FIO;
+        return name + " " +  surname +" "+ patronymic;
     }
 
-    public Client(String FIO, String mobNum, int ClientID)
-    {
-        this.FIO = FIO;
-        this.mobNum = mobNum;
-        this.clientID = ClientID;
-    }
+//    public Client(String FIO, String mobNum, int ClientID)
+//    {
+//        this.FIO = FIO;
+//        this.mobNum = mobNum;
+//        this.clientID = ClientID;
+//    }
 
     public String getFIO() {
-        return FIO;
+        return name + " " +  surname +" "+ patronymic;
     }
 
     public String getMobNum() {
@@ -43,10 +80,6 @@ public class Client {
         return clientID;
     }
 
-    public void setFIO(String FIO) {
-        this.FIO = FIO;
-    }
-
     public void setMobNum(String mobNum) {
         this.mobNum = mobNum;
     }
@@ -55,35 +88,28 @@ public class Client {
         this.clientID = clientID;
     }
 
-    public static List<Client> loadClientsInConsole() throws SQLException {
-        List<Client> clientList = new ArrayList<Client>();
-        String selectSql = "SELECT FIO, MobNum, ClientID from Clients";
-        PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            clientList.add(new Client(resultSet.getString(1), resultSet.getString(2),
-                    resultSet.getInt(3)));
-        }
-        return clientList;
-    }
-
     public static ArrayList<Client> loadClientsInForm() throws SQLException {
         ArrayList<Client> clientList = new ArrayList<Client>();
-        String selectSql = "SELECT FIO, MobNum, ClientID from Clients";
+        String selectSql = "SELECT Name, Surname, Patronymic, MobNum, ClientID from Clients";
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            clientList.add(new Client(resultSet.getString(1), resultSet.getString(2),
-                    resultSet.getInt(3)));
+            clientList.add(new Client(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
+                    resultSet.getInt(5)));
         }
         return clientList;
     }
 
 
-    public static void addClient(String FIO, String mobNum) throws SQLException {
+    public static void addClient(String name, String surname, String patronymic, String mobNum) throws SQLException {
+        String sqlQuery = "INSERT INTO Professions" + " (Profession, Salary) " + ("VALUES(?, ?)");
 
-        String  selectSql = "INSERT INTO Clients VALUES ('" + FIO + "','" + mobNum + "')";
+        String selectSql = "INSERT INTO Clients" + " (Name, Surname, Patronymic, MobNum " + ("VALUES(?, ?, ?, ?)");
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        statement.setString(1, name);
+        statement.setString(2, surname);
+        statement.setString(3, patronymic);
+        statement.setString(4, mobNum);
         int code = statement.executeUpdate();
         if (code == 1) {
             logger.info("Client added successfully");
@@ -92,7 +118,7 @@ public class Client {
 
     }
 
-    public static void deleteClient(int clientID) throws SQLException{
+    public static void deleteClient(int clientID) throws SQLException {
         String selectSql = "DELETE FROM Clients WHERE ClientID =  '" + clientID + "'";
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
         int code = statement.executeUpdate();
@@ -102,10 +128,14 @@ public class Client {
         }
     }
 
-    public static void updateClient(int clientID, String newFIO, String newMobNum) throws SQLException{
-        String selectSql = "UPDATE Clients SET FIO = '" + newFIO + "', MobNum = '" + newMobNum + "' WHERE ClientID = '" +
-                clientID + "'";
+    public static void updateClient(int clientID, String newName,String newSurname, String newPatronymic, String newMobNum) throws SQLException {
+        String selectSql = "UPDATE Clients SET" + " Name = ?, Surname = ?, Patronymic = ?, MobNum = ? WHERE ClientID = ?";
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
+        statement.setString(1, newName);
+        statement.setString(2,  newSurname);
+        statement.setString(3, newPatronymic);
+        statement.setString(4, newMobNum);
+        statement.setInt(5, clientID);
         int code = statement.executeUpdate();
         if (code >= 1) {
             logger.info("Client updated successfully");

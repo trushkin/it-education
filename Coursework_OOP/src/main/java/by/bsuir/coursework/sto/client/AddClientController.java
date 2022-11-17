@@ -1,5 +1,6 @@
 package by.bsuir.coursework.sto.client;
 
+import by.bsuir.coursework.sto.application.AlertImp;
 import by.bsuir.coursework.sto.client.Client;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +17,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
+
 
 public class AddClientController implements Initializable {
 
@@ -30,13 +33,25 @@ public class AddClientController implements Initializable {
     private TableColumn<Client, Integer> colClientID;
 
     @FXML
-    private TableColumn<Client, String> colFIO;
+    private TableColumn<Client, String> colClientName;
+
+    @FXML
+    private TableColumn<Client, String> colClientPatronymic;
+
+    @FXML
+    private TableColumn<Client, String> colClientSurname;
 
     @FXML
     private TableColumn<Client, String> colMobNum;
 
     @FXML
-    private TextField tfFIO;
+    private TextField tfName;
+
+    @FXML
+    private TextField tfPatronymic;
+
+    @FXML
+    private TextField tfSurname;
 
     @FXML
     private TextField tfMobNum;
@@ -81,10 +96,20 @@ public class AddClientController implements Initializable {
         colClientID.setStyle("-fx-alignment: center");
         colClientID.setCellValueFactory(new PropertyValueFactory<Client, Integer>("clientID"));
 
-        colFIO.setResizable(false);
-        colFIO.setSortable(false);
-        colFIO.setStyle("-fx-alignment: center");
-        colFIO.setCellValueFactory(new PropertyValueFactory<Client, String>("FIO"));
+        colClientName.setResizable(false);
+        colClientName.setSortable(false);
+        colClientName.setStyle("-fx-alignment: center");
+        colClientName.setCellValueFactory(new PropertyValueFactory<Client, String>("name"));
+
+        colClientSurname.setResizable(false);
+        colClientSurname.setSortable(false);
+        colClientSurname.setStyle("-fx-alignment: center");
+        colClientSurname.setCellValueFactory(new PropertyValueFactory<Client, String>("surname"));
+
+        colClientPatronymic.setResizable(false);
+        colClientPatronymic.setSortable(false);
+        colClientPatronymic.setStyle("-fx-alignment: center");
+        colClientPatronymic.setCellValueFactory(new PropertyValueFactory<Client, String>("patronymic"));
 
         colMobNum.setResizable(false);
         colMobNum.setSortable(false);
@@ -96,61 +121,66 @@ public class AddClientController implements Initializable {
 
     @FXML
     void insertClientBtnClick(ActionEvent event) {
-        if (tfMobNum.getText() != "" && tfFIO.getText() != "") {
+        if (!Objects.equals(tfMobNum.getText(), "") && !Objects.equals(tfName.getText(), "") && !Objects.equals(tfSurname.getText(), "") && !Objects.equals(tfPatronymic.getText(), "")) {
             try {
-                Client.addClient(tfFIO.getText(), tfMobNum.getText());
+                Client.addClient(tfName.getText(),tfSurname.getText(), tfPatronymic.getText(), tfMobNum.getText());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
                 //System.out.println("Ошибка SQL !");
                 logger.error("Inserting client error");
             }
-            tfFIO.clear();
+            tfName.clear();
+            tfSurname.clear();
+            tfPatronymic.clear();
             tfMobNum.clear();
             displayClients();
-            lblErrorClient.setText("");
-        } else lblErrorClient.setText("Не все поля заполнены!");
+
+        } else AlertImp.showAlert("Добавление клиента", "Не все поля заполнены!");
     }
 
     public void displaySelectedClientFromTable(MouseEvent mouseEvent) {
         if (tvClients.getSelectionModel().getSelectedItem() != null) {
             Client selectedClient = tvClients.getSelectionModel().getSelectedItem();
-            tfFIO.setText(selectedClient.getFIO());
+            tfName.setText(selectedClient.getName());
+            tfSurname.setText(selectedClient.getSurname());
+            tfPatronymic.setText(selectedClient.getPatronymic());
             tfMobNum.setText(selectedClient.getMobNum());
         }
     }
 
     public void deleteClientBtnClick(ActionEvent actionEvent) {
-        if (tfMobNum.getText() != "" && tfFIO.getText() != "" && tvClients.getSelectionModel().getSelectedItem() != null) {
+        if (!Objects.equals(tfMobNum.getText(), "") && !Objects.equals(tfName.getText(), "") && !Objects.equals(tfSurname.getText(), "") && !Objects.equals(tfPatronymic.getText(), "") && tvClients.getSelectionModel().getSelectedItem() != null) {
             Client selectedClient = tvClients.getSelectionModel().getSelectedItem();
             try {
                 Client.deleteClient(selectedClient.getClientID());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-               // System.out.println("Ошибка SQL !");
                 logger.error("Deleting client error");
             }
-            tfFIO.clear();
+            tfName.clear();
+            tfSurname.clear();
+            tfPatronymic.clear();
             tfMobNum.clear();
             displayClients();
-            lblErrorClient.setText("");
-        } else lblErrorClient.setText("Не все поля заполнены!");
+        } else AlertImp.showAlert("Удаление клиента", "Не все поля заполнены!");
     }
 
     public void updateClientBtnClick(ActionEvent actionEvent) {
-        if (tfMobNum.getText() != "" && tfFIO.getText() != "" && tvClients.getSelectionModel().getSelectedItem() != null) {
+        if (!Objects.equals(tfMobNum.getText(), "") && !Objects.equals(tfName.getText(), "") && !Objects.equals(tfSurname.getText(), "") && !Objects.equals(tfPatronymic.getText(), "") && tvClients.getSelectionModel().getSelectedItem() != null) {
             Client selectedClient = tvClients.getSelectionModel().getSelectedItem();
             try {
-                Client.updateClient(selectedClient.getClientID(), tfFIO.getText(), tfMobNum.getText());
+                Client.updateClient(selectedClient.getClientID(), tfName.getText(), tfSurname.getText(), tfPatronymic.getText(), tfMobNum.getText());
             } catch (SQLException e) {
                 e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
                // System.out.println("Ошибка SQL !");
                 logger.error("Updating client error");
             }
-            tfFIO.clear();
+            tfName.clear();
+            tfSurname.clear();
+            tfPatronymic.clear();
             tfMobNum.clear();
             displayClients();
-            lblErrorClient.setText("");
-        } else lblErrorClient.setText("Не все поля заполнены!");
+        } else AlertImp.showAlert("Редактирование клиента", "Не все поля заполнены!");;
     }
 }
 

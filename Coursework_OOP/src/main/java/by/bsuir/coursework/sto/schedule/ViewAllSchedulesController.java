@@ -123,7 +123,7 @@ public class ViewAllSchedulesController implements Initializable {
 
         colLift.setSortable(true);
         colLift.setResizable(false);
-        colLift.setCellValueFactory(new PropertyValueFactory<SchedulePrint, String>("liftName"));
+        colLift.setCellValueFactory(new PropertyValueFactory<SchedulePrint, String>("liftType"));
         colLift.setStyle("-fx-alignment: center");
 
         tvSchedules.setItems(schedulesObservableList);

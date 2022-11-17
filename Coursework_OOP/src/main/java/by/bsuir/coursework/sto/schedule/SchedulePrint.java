@@ -11,7 +11,7 @@ public class SchedulePrint {
     private LocalDateTime startDate;
     private int duration;
     private int scheduleID;
-    private String liftName;
+    private String liftType;
     private String comment;
 
 
@@ -25,7 +25,7 @@ public class SchedulePrint {
         this.startDate = startDate;
         this.duration = duration;
         this.scheduleID = scheduleID;
-        this.liftName = liftName;
+        this.liftType = liftName;
         this.comment = comment;
 
     }
@@ -75,8 +75,8 @@ public class SchedulePrint {
     public int getDuration() {
         return duration;
     }
-    public String getLiftName() {
-        return liftName;
+    public String getLiftType() {
+        return liftType;
     }
 
     public String getComment() {

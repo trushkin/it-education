@@ -112,14 +112,14 @@ public class Schedule {
 
     public static ArrayList<SchedulePrint> loadScheduleToPrint() throws SQLException {
         ArrayList<SchedulePrint> scheduleList = new ArrayList<SchedulePrint>();
-        String selectSql = "select Lifts.Name, Cars.StateNum, Cars.Brand, Cars.Model, Clients.FIO, Schedule.Mileage, Schedule.StartDate, Schedule.Duration, Schedule.ScheduleID, Schedule.Comment from Schedule\n" +
+        String selectSql = "select Lifts.LiftType, Cars.StateNum, Cars.Brand, Cars.Model, Clients.Name, Clients.Surname, Clients.Patronymic, Schedule.Mileage, Schedule.StartDate, Schedule.Duration, Schedule.ScheduleID, Schedule.Comment from Schedule\n" +
                 "\tinner join Cars on Schedule.CarID = Cars.CarID\n" +
                 "\tinner join Clients on Schedule.ClientID = Clients.ClientID\n" +
                 "\tinner join Lifts on Schedule.LiftID = Lifts.LiftID \n";
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            scheduleList.add(new SchedulePrint(resultSet.getString("StateNum"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getString("FIO"), resultSet.getInt("Mileage"), resultSet.getTimestamp("StartDate").toLocalDateTime(), resultSet.getInt("Duration"), resultSet.getInt("ScheduleID"), resultSet.getString("Name"), resultSet.getString("Comment")));
+            scheduleList.add(new SchedulePrint(resultSet.getString("StateNum"), resultSet.getString("Brand"), resultSet.getString("Model"), resultSet.getString("Name") + " " + resultSet.getString("Surname") + " " + resultSet.getString("Patronymic"), resultSet.getInt("Mileage"), resultSet.getTimestamp("StartDate").toLocalDateTime(), resultSet.getInt("Duration"), resultSet.getInt("ScheduleID"), resultSet.getString("LiftType"), resultSet.getString("Comment")));
         }
         return scheduleList;
     }
@@ -152,7 +152,7 @@ public class Schedule {
         //LocalDateTime finalWorkingTime = startDate;
         LocalDateTime endWorkTime = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), Properties.getEndWorkTime(), 0);
 
-        if(!startDate.plusMinutes((int)(duration * 60)).isAfter(endWorkTime)) {
+        if (!startDate.plusMinutes((int) (duration * 60)).isAfter(endWorkTime)) {
             return startDate.plusMinutes((int) (duration * 60));
         }
         if ((int) duration == 0) {

@@ -99,7 +99,7 @@ public class MainScreenController implements Initializable {
         //lift loop
         try {
             for (Lift curLift : Lift.loadLifts()) {
-                TableColumn<ScheduleRow, String> liftColumn = new TableColumn<>(curLift.getName());
+                TableColumn<ScheduleRow, String> liftColumn = new TableColumn<>(curLift.getLiftType());
                 liftColumn.setCellValueFactory(p -> p.getValue().getSchedulePerLift(curLift.getLiftID()));
                 liftColumn.setCellFactory(p -> new ColoredTableCell());
                 tvSchedule.getColumns().add(liftColumn);

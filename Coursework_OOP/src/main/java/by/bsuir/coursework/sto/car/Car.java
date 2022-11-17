@@ -26,15 +26,11 @@ public class Car {
     static {
         logger = LogManager.getLogger();
     }
-    {
-        this.brand = "Toyota"; //Ваня - тойота, я - лексус
-    }
 
     public Car(String stateNum, String VIN, String brand, String model, int carID, int clientID) {
         this.stateNum = stateNum;
         this.VIN = VIN;
-        //this.brand = brand;
-        this.brand = "lexus";
+        this.brand = brand;
         this.model = model;
         this.carID = carID;
         this.clientID = clientID;
@@ -134,15 +130,15 @@ public class Car {
 
     public static ArrayList<CarRow> loadCarDetails() throws SQLException {
         ArrayList<CarRow> carList = new ArrayList<CarRow>();
-        String selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, Cars.ClientID, FIO from Cars INNER JOIN Clients ON Cars.ClientID = Clients.ClientID";
+        String selectSql = "SELECT StateNum, VIN, Brand, Model, CarID, Cars.ClientID, Name, Surname, Patronymic from Cars INNER JOIN Clients ON Cars.ClientID = Clients.ClientID";
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             carList.add(new CarRow(resultSet.getString("StateNum"), resultSet.getString("VIN"),
                     resultSet.getString("Brand"), resultSet.getString("Model"),
                     resultSet.getInt("CarID"), resultSet.getInt("ClientID"),
-                    resultSet.getString("FIO")));
-        }
+                    resultSet.getString("Name") + " " + resultSet.getString("Surname") + " " + resultSet.getString("Patronymic")));
+    }
         return carList;
     }
 
