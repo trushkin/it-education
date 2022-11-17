@@ -61,13 +61,6 @@ public class Client {
         return name + " " +  surname +" "+ patronymic;
     }
 
-//    public Client(String FIO, String mobNum, int ClientID)
-//    {
-//        this.FIO = FIO;
-//        this.mobNum = mobNum;
-//        this.clientID = ClientID;
-//    }
-
     public String getFIO() {
         return name + " " +  surname +" "+ patronymic;
     }
@@ -88,8 +81,8 @@ public class Client {
         this.clientID = clientID;
     }
 
-    public static ArrayList<Client> loadClientsInForm() throws SQLException {
-        ArrayList<Client> clientList = new ArrayList<Client>();
+    public static List<Client> loadClientsInForm() throws SQLException {
+        List<Client> clientList = new ArrayList<>();
         String selectSql = "SELECT Name, Surname, Patronymic, MobNum, ClientID from Clients";
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
         ResultSet resultSet = statement.executeQuery();
@@ -102,9 +95,8 @@ public class Client {
 
 
     public static void addClient(String name, String surname, String patronymic, String mobNum) throws SQLException {
-        String sqlQuery = "INSERT INTO Professions" + " (Profession, Salary) " + ("VALUES(?, ?)");
 
-        String selectSql = "INSERT INTO Clients" + " (Name, Surname, Patronymic, MobNum " + ("VALUES(?, ?, ?, ?)");
+        String selectSql = "INSERT INTO Clients" + " (Name, Surname, Patronymic, MobNum) " + ("VALUES(?, ?, ?, ?)");
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
         statement.setString(1, name);
         statement.setString(2, surname);
@@ -113,7 +105,6 @@ public class Client {
         int code = statement.executeUpdate();
         if (code == 1) {
             logger.info("Client added successfully");
-            return;
         }
 
     }
@@ -123,8 +114,7 @@ public class Client {
         PreparedStatement statement = DatabaseConnectionProvider.getConnection().prepareStatement(selectSql);
         int code = statement.executeUpdate();
         if (code >= 1) {
-            logger.info("Client deleted successfully");
-            return;
+            logger.info("Client {} deleted successfully", clientID);
         }
     }
 
@@ -139,7 +129,6 @@ public class Client {
         int code = statement.executeUpdate();
         if (code >= 1) {
             logger.info("Client updated successfully");
-            return;
         }
     }
 

@@ -1,6 +1,7 @@
 package by.bsuir.coursework.sto.client;
 
 import by.bsuir.coursework.sto.application.AlertImp;
+import by.bsuir.coursework.sto.application.DatabaseCompleting;
 import by.bsuir.coursework.sto.client.Client;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -67,6 +68,11 @@ public class AddClientController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            DatabaseCompleting.fillClientsWithTestValues();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         displayClients();
         // заполнение textField только цифрами
         tfMobNum.textProperty().addListener(new ChangeListener<String>() {

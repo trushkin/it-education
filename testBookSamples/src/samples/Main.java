@@ -1,5 +1,7 @@
 package samples;
 
+import java.util.Random;
+
 class MyClass {
     public String string;
 
@@ -10,6 +12,7 @@ class MyClass {
     MyClass() {
         this.string = "1";
     }
+    protected class A1{}
 
 }
 
@@ -48,10 +51,22 @@ class Flower {
 }
 
 public class Main {
+    protected static class A{
+        public A() {
+        }
+    }
+    static class B{}
+    protected int b = 10;
+    protected void foo(int a){}
     public static void main(String[] args) {
         MyClass myClass = new MyClass();
         System.out.println(myClass.string);
         Flower x = new Flower();
         x.printPetalCount();
+        Random random = new Random();
+        for (int i = 0; i < 30; i++) {
+            System.out.println("37544" + random.nextInt(100000, 1000000));
+        }
     }
+
 }
