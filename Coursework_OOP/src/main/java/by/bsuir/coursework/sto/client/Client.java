@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    // private String FIO;
     private String name;
     private String surname;
     private String patronymic;

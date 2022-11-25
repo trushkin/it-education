@@ -62,7 +62,7 @@ public class DatabaseCompleting {
         int clientIndex = 0;
         while (clientIndex < 10) {
             Client.addClient(nameList.get(random.nextInt(nameList.size())), surnameList.get(random.nextInt(surnameList.size())),
-                    patronymicList.get(random.nextInt(patronymicList.size())), "37544" + random.nextInt(100000, 1000000));
+                    patronymicList.get(random.nextInt(patronymicList.size())), "37544" + random.nextInt(1000000, 10000000));
             clientIndex++;
         }
     }

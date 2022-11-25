@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3444c716-db83-4ba4-9c5f-826a9a59d615" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/package2/AccessTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/samples/AccessTestSamples.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/application/DatabaseCompleting.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/application/DatabaseCompleting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/client/AddClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/client/AddClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/5/452b485a5ee92c2393b8c4f9f527012d3b66ca73" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/8/88a22d9e4d356a99b6aa3455ec929361f38ec24a" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/samples/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/samples/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,11 +37,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "C:/workspace/git/it-education/testBookSamples"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;C:/workspace/git/it-education/testBookSamples&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="samples.Main" />

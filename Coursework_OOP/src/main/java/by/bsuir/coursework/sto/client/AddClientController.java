@@ -68,11 +68,11 @@ public class AddClientController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            DatabaseCompleting.fillClientsWithTestValues();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            DatabaseCompleting.fillClientsWithTestValues();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
         displayClients();
         // заполнение textField только цифрами
         tfMobNum.textProperty().addListener(new ChangeListener<String>() {

@@ -7,14 +7,13 @@ import javafx.beans.property.StringProperty;
 import java.util.HashMap;
 import java.util.Map;
 
-class ScheduleRow {
-    private String time;
+public class ScheduleRow {
+    public String time;
     Map<Integer, SchedulePrint> schedulePerLift = new HashMap<>();
 
     public ScheduleRow(String time) {
         this.time = time;
     }
-
 
     public String getTime() {
         return time;

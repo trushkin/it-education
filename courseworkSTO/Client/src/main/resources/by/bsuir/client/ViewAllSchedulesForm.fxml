@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.client.ViewAllSchedulesController">
+   <children>
+      <HBox prefHeight="26.0" prefWidth="948.0">
+         <children>
+            <Label fx:id="lblClients" alignment="CENTER" prefHeight="26.0" prefWidth="110.0" text="Клиенты:" />
+            <ComboBox fx:id="cbClientsFilter" onAction="#onCbClientsFilterClick" prefWidth="150.0" />
+            <Label fx:id="lblCars" alignment="CENTER" prefHeight="26.0" prefWidth="110.0" text="Машины:" />
+            <ComboBox fx:id="cbCarFilter" onAction="#onCarFilterClick" prefWidth="150.0" />
+            <DatePicker fx:id="dtDateFilter" onAction="#onDateFilterClick" prefHeight="26.0" prefWidth="199.0" />
+            <Button fx:id="btnDeleteSelected" mnemonicParsing="false" onAction="#deleteSelectedScheduleClick" prefHeight="26.0" prefWidth="186.0" text="Удалить выбранную запись" />
+            <Button fx:id="btnClearFilters" mnemonicParsing="false" onAction="#onClearFiltersClick" prefHeight="26.0" prefWidth="151.0" text="Сбросить фильтры" />
+         </children></HBox>
+      <TableView fx:id="tvSchedules" onMouseClicked="#displaySelectedScheduleComment" prefHeight="416.0" prefWidth="737.0">
+        <columns>
+          <TableColumn fx:id="colBrand" prefWidth="85.60000610351562" text="Марка" />
+          <TableColumn fx:id="colModel" prefWidth="85.5999755859375" text="Модель" />
+            <TableColumn fx:id="colStateNum" prefWidth="72.800048828125" text="StateNum" />
+            <TableColumn fx:id="colFIO" prefWidth="207.19996643066406" text="Клиент" />
+            <TableColumn fx:id="colMileage" prefWidth="84.800048828125" text="Пробег" />
+            <TableColumn fx:id="colStartDate" prefWidth="177.60003662109375" text="Время начала работ" />
+            <TableColumn fx:id="colDuration" prefWidth="88.7999267578125" text="Длительность" />
+            <TableColumn fx:id="colLift" prefWidth="149.60009765625" text="Подъёмник" />
+        </columns>
+      </TableView>
+      <TextArea fx:id="taComment" editable="false" prefHeight="126.0" prefWidth="955.0" promptText="Причина обращения:" />
+   </children>
+</VBox>
