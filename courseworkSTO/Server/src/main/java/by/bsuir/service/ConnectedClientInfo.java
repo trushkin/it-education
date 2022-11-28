@@ -1,4 +1,4 @@
-package by.bsuir;
+package by.bsuir.service;
 
 import java.net.Socket;
 
@@ -6,12 +6,12 @@ public class ConnectedClientInfo {
 
     private Socket connectionSocket;
 
-//    private ConnectedClientInfo() {
-//        connectionSocket = new Socket();
-//    }
+    private ConnectedClientInfo() {
+        connectionSocket = new Socket();
+    }
 
     public ConnectedClientInfo(Socket connectionSocket) {
-        //this();
+        this();
         setConnectionSocket(connectionSocket);
     }
 

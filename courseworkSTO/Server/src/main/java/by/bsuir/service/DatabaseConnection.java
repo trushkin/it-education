@@ -1,4 +1,4 @@
-package by.bsuir;
+package by.bsuir.service;
 
 
 import org.apache.logging.log4j.LogManager;

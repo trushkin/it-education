@@ -1,6 +1,5 @@
 package by.pojo;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 public class Client implements Serializable {
@@ -64,6 +63,8 @@ public class Client implements Serializable {
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
-
-
+    @Override
+    public String toString() {
+        return name + " " +  surname +" "+ patronymic;
+    }
 }

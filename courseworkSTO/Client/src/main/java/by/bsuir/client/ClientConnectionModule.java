@@ -3,6 +3,8 @@ package by.bsuir.client;
 
 
 
+import by.pojo.Car;
+import by.pojo.CarRow;
 import by.pojo.Client;
 
 import java.io.*;
@@ -38,11 +40,6 @@ public class ClientConnectionModule {
         socket = new Socket(serverIp, serverPort);
     }
 
-    public String test() throws IOException, ClassNotFoundException {
-        sendObject("1");
-        return receiveObject();
-    }
-
     public ArrayList<Client> getAllClients() {
         try {
             sendObject("GET_ALL_CLIENTS");
@@ -50,6 +47,67 @@ public class ClientConnectionModule {
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public void createClient(Client client){
+        try {
+            sendObject("CREATE_CLIENT");
+            sendObject(client);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteClient(int clientId){
+        try {
+            sendObject("DELETE_CLIENT");
+            sendObject(clientId);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateClient(Client client){
+        try{
+            sendObject("UPDATE_CLIENT");
+            sendObject(client);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<CarRow> getAllCars(){
+        try {
+            sendObject("GET_ALL_CARS");
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void createCar(Car car){
+        try {
+            sendObject("CREATE_CAR");
+            sendObject(car);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void deleteCar(int carId){
+        try {
+            sendObject("DELETE_CAR");
+            sendObject(carId);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateCar(Car car){
+        try{
+            sendObject("UPDATE_CAR");
+            sendObject(car);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

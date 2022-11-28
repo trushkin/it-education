@@ -1,5 +1,8 @@
-package by.bsuir;
+package by.bsuir.client;
 
+import by.bsuir.service.ClientConnector;
+import by.bsuir.service.DatabaseConnection;
+import by.bsuir.service.ManageCommand;
 import by.pojo.Client;
 
 import java.io.IOException;
