@@ -1,6 +1,7 @@
-package by.bsuir.client;
+package by.bsuir.client.controllers;
 
 
+import by.pojo.Client;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,10 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import by.pojo.Client;
 
-import java.io.IOException;
 import java.util.ArrayList;
+
+import static by.bsuir.client.service.AlertImp.showAlert;
+import static by.bsuir.client.ClientApp.connection;
 
 public class ClientController {
 
@@ -48,20 +50,9 @@ public class ClientController {
 
     @FXML
     private TextField tfMobNum;
-
     @FXML
     private TableView<Client> tvClients;
 
-    public static final int PORT = 1022;
-    public static final String IP = "localhost";
-    ClientConnectionModule connection = new ClientConnectionModule(IP, PORT);
-    {
-        try {
-            connection.connectToServer();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     public void initialize() {
         colClientID.setResizable(false);
         colClientID.setSortable(false);
@@ -97,11 +88,6 @@ public class ClientController {
                 }
             }
         });
-//        try {
-//            connection.connectToServer();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         refreshTable();
 
     }
@@ -120,23 +106,19 @@ public class ClientController {
     public void insertClientBtnClick(ActionEvent actionEvent) {
         if (!tfName.getText().equals("") && !tfSurname.getText().equals("") && !tfPatronymic.getText().equals("") && !tfMobNum.getText().equals("")) {
            Client newClient = new Client(tfName.getText(), tfSurname.getText(), tfPatronymic.getText(), tfMobNum.getText());
-            connection.createClient(newClient);
+            boolean flag = connection.createClient(newClient);
+            if(flag == true){
+                showAlert("", "Клиент добавлен успешно", Alert.AlertType.INFORMATION);
+            }
             tfName.clear();
             tfSurname.clear();
             tfPatronymic.clear();
             tfMobNum.clear();
             refreshTable();
         } else {
-            showAlert("Invalid input", "Fill all fields at first");
+            showAlert("Ошибка ввода", "Пожалуйста, зааолните все поля", Alert.AlertType.WARNING);
         }
         refreshTable();
-    }
-    private void showAlert(String header, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setHeaderText(header);
-        alert.setContentText(message);
-        alert.showAndWait().ifPresent(rs -> {
-        });
     }
     public void refreshTable() {
         ArrayList<Client> clientArrayList = connection.getAllClients();
@@ -145,7 +127,10 @@ public class ClientController {
 
     public void deleteClientBtnClick(ActionEvent actionEvent) {
         if (!tfName.getText().equals("") && !tfSurname.getText().equals("") && !tfPatronymic.getText().equals("") && !tfMobNum.getText().equals("")) {
-            connection.deleteClient(tvClients.getSelectionModel().getSelectedItem().getClientID());
+            boolean flag = connection.deleteClient(tvClients.getSelectionModel().getSelectedItem().getClientID());
+            if(flag == true){
+                showAlert("", "Запись о клиенте удалена успешно", Alert.AlertType.INFORMATION);
+            }
             tfName.clear();
             tfSurname.clear();
             tfPatronymic.clear();
@@ -153,14 +138,17 @@ public class ClientController {
             refreshTable();
         }
         else {
-            showAlert("Invalid input", "Fill all fields at first");
+            showAlert("Ошибка ввода", "Пожалуйста, зааолните все поля", Alert.AlertType.WARNING);
         }
     }
 
     public void updateClientBtnClick(ActionEvent actionEvent) {
         if (!tfName.getText().equals("") && !tfSurname.getText().equals("") && !tfPatronymic.getText().equals("") && !tfMobNum.getText().equals("")) {
             Client client = new Client(tfName.getText(), tfSurname.getText(), tfPatronymic.getText(), tfMobNum.getText(), tvClients.getSelectionModel().getSelectedItem().getClientID());
-            connection.updateClient(client);
+            boolean flag  = connection.updateClient(client);
+            if(flag == true){
+                showAlert("", "Запись о клиенте удалена успешно", Alert.AlertType.INFORMATION);
+            }
             tfName.clear();
             tfSurname.clear();
             tfPatronymic.clear();
@@ -168,7 +156,7 @@ public class ClientController {
             refreshTable();
         }
         else {
-            showAlert("Invalid input", "Fill all fields at first");
+            showAlert("Ошибка ввода", "Пожалуйста, зааолните все поля", Alert.AlertType.WARNING);
         }
     }
 }

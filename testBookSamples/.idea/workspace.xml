@@ -2,6 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3444c716-db83-4ba4-9c5f-826a9a59d615" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/AlertImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/Schedule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/SchedulePrint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/schedule/GetSchedulesToPrintCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/package2/chapter7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/schedule/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/schedule/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/CarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientConnectionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientConnectionModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ViewAllSchedulesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ViewAllSchedulesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/CreateCarCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/CreateCarCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/DeleteCarCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/DeleteCarCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/GetAllCarsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/GetAllCarsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/UpdateCarCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/UpdateCarCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/CreateClientCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/CreateClientCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/DeleteClientCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/DeleteClientCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/UpdateClientCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/UpdateClientCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>

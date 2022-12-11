@@ -105,7 +105,6 @@ public class Schedule {
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             scheduleList.add(new Schedule(resultSet.getInt("ScheduleID"), resultSet.getInt("ClientID"), resultSet.getInt("CarID"), resultSet.getInt("LiftID"), resultSet.getTimestamp("StartDate").toLocalDateTime(), resultSet.getInt("Duration"), resultSet.getString("Comment"), resultSet.getInt("Mileage")));
-
         }
         return scheduleList;
     }

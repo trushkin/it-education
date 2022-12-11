@@ -17,6 +17,7 @@ public class Client implements Serializable {
         this.mobNum = mobNum;
         this.clientID = clientID;
     }
+
     public Client(String name, String surname, String patronymic, String mobNum) {
         this.name = name;
         this.surname = surname;
@@ -63,8 +64,10 @@ public class Client implements Serializable {
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
+    public String getFIO(){return name + " " + surname + " " + patronymic; }
+
     @Override
     public String toString() {
-        return name + " " +  surname +" "+ patronymic;
+        return name + " " + surname + " " + patronymic;
     }
 }

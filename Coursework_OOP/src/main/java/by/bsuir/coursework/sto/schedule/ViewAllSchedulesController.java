@@ -154,8 +154,6 @@ public class ViewAllSchedulesController implements Initializable {
             else if (FIO == null && Objects.equals(l.getStateNum(), stateNum) && (l.getStartDate().getYear() == date.getYear() && l.getStartDate().getMonth() == date.getMonth() && l.getStartDate().getDayOfMonth() == date.getDayOfMonth())) // 0 1 1
                 filteredSchedulesObservableList.add(l);
         }
-
-
         return filteredSchedulesObservableList;
     }
 

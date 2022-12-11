@@ -1,15 +1,18 @@
 package by.bsuir;
 
-import by.bsuir.car.CreateCarCommand;
-import by.bsuir.car.DeleteCarCommand;
-import by.bsuir.car.GetAllCarsCommand;
-import by.bsuir.car.UpdateCarCommand;
+import by.bsuir.car.*;
 import by.bsuir.client.CreateClientCommand;
 import by.bsuir.client.DeleteClientCommand;
 import by.bsuir.client.GetAllClientsCommand;
 import by.bsuir.client.UpdateClientCommand;
+import by.bsuir.lift.GetAllLiftsCommand;
+import by.bsuir.properties.GetWorkingHoursCommand;
+import by.bsuir.schedule.DeleteScheduleCommand;
+import by.bsuir.schedule.GetSchedulesToPrintCommand;
 import by.bsuir.service.ClientConnector;
 import by.bsuir.service.ConnectedClientInfo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.Socket;
@@ -38,6 +41,8 @@ public class ClientHandler extends Thread {
         return (T) objectInputStream.readObject();
     }
 
+    private static Logger logger = LogManager.getLogger();
+
     private void clientProcessing() throws IOException, ClassNotFoundException {
         ClientConnector clientConnector = new ClientConnector() {
             @Override
@@ -52,7 +57,7 @@ public class ClientHandler extends Thread {
         };
         while (true) {
             String command = receiveObject();
-            System.out.println("Receive command: " + command);
+            logger.info("Receive command: " + command);
             switch (command) {
                 case "GET_ALL_CLIENTS" -> {
                     GetAllClientsCommand getAllClientsCommand = new GetAllClientsCommand(clientConnector);
@@ -74,19 +79,38 @@ public class ClientHandler extends Thread {
                     GetAllCarsCommand getAllCarsCommand = new GetAllCarsCommand(clientConnector);
                     getAllCarsCommand.execute();
                 }
-                case "CREATE_CAR"->{
-                    CreateCarCommand createCarCommand=new CreateCarCommand(clientConnector);
+                case "CREATE_CAR" -> {
+                    CreateCarCommand createCarCommand = new CreateCarCommand(clientConnector);
                     createCarCommand.execute();
                 }
-                case "DELETE_CAR"->{
+                case "DELETE_CAR" -> {
                     DeleteCarCommand deleteCarCommand = new DeleteCarCommand(clientConnector);
                     deleteCarCommand.execute();
                 }
-                case "UPDATE_CAR"->{
+                case "UPDATE_CAR" -> {
                     UpdateCarCommand updateCarCommand = new UpdateCarCommand(clientConnector);
                     updateCarCommand.execute();
                 }
-
+                case "GET_SCHEDULES_TO_PRINT" -> {
+                    GetSchedulesToPrintCommand getSchedulesToPrintCommand = new GetSchedulesToPrintCommand(clientConnector);
+                    getSchedulesToPrintCommand.execute();
+                }
+                case "LOAD_CLIENT_CARS_IN_CB" -> {
+                    LoadClientCarsInCbCommand loadClientCarsInCbCommand = new LoadClientCarsInCbCommand(clientConnector);
+                    loadClientCarsInCbCommand.execute();
+                }
+                case "DELETE_SCHEDULE" -> {
+                    DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(clientConnector);
+                    deleteScheduleCommand.execute();
+                }
+                case "GET_WORKING_HOURS" -> {
+                    GetWorkingHoursCommand getWorkingHoursCommand = new GetWorkingHoursCommand(clientConnector);
+                    getWorkingHoursCommand.execute();
+                }
+                case "GET_ALL_LIFTS" -> {
+                    GetAllLiftsCommand getAllLiftsCommand = new GetAllLiftsCommand(clientConnector);
+                    getAllLiftsCommand.execute();
+                }
                 default -> throw new IllegalStateException("Unexpected value: " + command);
             }
         }

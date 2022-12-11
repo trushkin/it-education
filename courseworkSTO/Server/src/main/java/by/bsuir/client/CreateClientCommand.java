@@ -13,13 +13,12 @@ import java.sql.SQLException;
 
 
 public class CreateClientCommand implements ManageCommand {
+    private static Logger logger = LogManager.getLogger();
     private ClientConnector clientConnector;
 
     public CreateClientCommand(ClientConnector clientConnector) {
         this.clientConnector = clientConnector;
     }
-
-    public static Logger logger = LogManager.getLogger();
 
     @Override
     public void execute() {
@@ -32,7 +31,8 @@ public class CreateClientCommand implements ManageCommand {
             statement.setString(4, client.getMobNum());
             int code = statement.executeUpdate();
             if (code == 1) {
-                logger.debug("Client {} created successfully", client.getClientID());
+                logger.debug("Client with ID: {} created successfully", client.getClientID());
+                clientConnector.sendObject(true);
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);

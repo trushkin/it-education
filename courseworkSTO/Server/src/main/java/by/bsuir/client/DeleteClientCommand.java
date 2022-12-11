@@ -11,9 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DeleteClientCommand implements ManageCommand {
+    private static Logger logger = LogManager.getLogger();
     private ClientConnector clientConnector;
-    public static Logger logger = LogManager.getLogger();
-
     public DeleteClientCommand(ClientConnector clientConnector) {
         this.clientConnector = clientConnector;
     }
@@ -26,9 +25,9 @@ public class DeleteClientCommand implements ManageCommand {
             String sqlQuery = "DELETE FROM Clients WHERE ClientID =  " + clientId + "";
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sqlQuery);
             int code = statement.executeUpdate();
-            System.out.println(sqlQuery + "Executed with code: " + code);
             if (code >= 1) {
-                logger.debug("Client deleted successfully");
+                logger.debug("Client with ID: {} deleted successfully", clientId);
+                clientConnector.sendObject(true);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

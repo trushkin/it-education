@@ -12,11 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateClientCommand implements ManageCommand {
+    private static Logger logger = LogManager.getLogger();
     private ClientConnector clientConnector;
     public UpdateClientCommand(ClientConnector clientConnector) {
         this.clientConnector = clientConnector;
     }
-    public static Logger logger = LogManager.getLogger();
     @Override
     public void execute() {
         String selectSql = "UPDATE Clients SET" + " Name = ?, Surname = ?, Patronymic = ?, MobNum = ? WHERE ClientID = ?";
@@ -29,7 +29,9 @@ public class UpdateClientCommand implements ManageCommand {
             statement.setInt(5, client.getClientID());
             int code = statement.executeUpdate();
             if (code >= 1) {
-                logger.debug("Client updated successfully");
+                logger.debug("Client with ID: {} updated successfully", client.getClientID());
+                clientConnector.sendObject(true);
+
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);

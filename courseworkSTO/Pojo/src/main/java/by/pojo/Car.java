@@ -76,13 +76,6 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "stateNum='" + stateNum + '\'' +
-                ", VIN='" + VIN + '\'' +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", carID=" + carID +
-                ", clientID=" + clientID +
-                '}';
+        return brand + " " + model + " " + stateNum;
     }
 }

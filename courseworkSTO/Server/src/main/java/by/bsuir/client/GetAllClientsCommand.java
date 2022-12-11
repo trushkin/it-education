@@ -4,6 +4,8 @@ import by.bsuir.service.ClientConnector;
 import by.bsuir.service.DatabaseConnection;
 import by.bsuir.service.ManageCommand;
 import by.pojo.Client;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -17,7 +19,7 @@ public class GetAllClientsCommand implements ManageCommand {
     public GetAllClientsCommand(ClientConnector clientConnector) {
         this.clientConnector = clientConnector;
     }
-
+    private static Logger logger = LogManager.getLogger();
     @Override
     public void execute() {
         ArrayList<Client> clientList = new ArrayList<>();
@@ -33,6 +35,7 @@ public class GetAllClientsCommand implements ManageCommand {
         }
         try {
             clientConnector.sendObject(clientList);
+            logger.debug("Client list sent");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

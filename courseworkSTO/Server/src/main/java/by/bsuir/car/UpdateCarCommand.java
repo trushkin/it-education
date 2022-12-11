@@ -4,7 +4,6 @@ import by.bsuir.service.ClientConnector;
 import by.bsuir.service.DatabaseConnection;
 import by.bsuir.service.ManageCommand;
 import by.pojo.Car;
-import by.pojo.Client;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 
 public class UpdateCarCommand implements ManageCommand {
     private ClientConnector clientConnector;
-    public static Logger logger = LogManager.getLogger();
+    private static Logger logger = LogManager.getLogger();
 
     public UpdateCarCommand(ClientConnector clientConnector) {
         this.clientConnector = clientConnector;
@@ -25,7 +24,6 @@ public class UpdateCarCommand implements ManageCommand {
         String selectSql = "UPDATE Cars SET" + " StateNum = ?, VIN = ?, Brand = ?, Model = ?, ClientID = ? WHERE CarID = ?";
         try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(selectSql)) {
             Car car = clientConnector.receiveObject();
-            System.out.println(car);
             statement.setString(1, car.getStateNum());
             statement.setString(2, car.getVIN());
             statement.setString(3, car.getBrand());
@@ -34,7 +32,8 @@ public class UpdateCarCommand implements ManageCommand {
             statement.setInt(6, car.getCarID());
             int code = statement.executeUpdate();
             if (code >= 1) {
-                logger.debug("Car updated successfully");
+                logger.debug("Car with ID: {} updated successfully", car.getCarID());
+                clientConnector.sendObject(true);
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);

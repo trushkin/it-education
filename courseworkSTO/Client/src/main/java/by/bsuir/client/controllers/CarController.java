@@ -1,4 +1,4 @@
-package by.bsuir.client;
+package by.bsuir.client.controllers;
 
 import by.pojo.Car;
 import by.pojo.CarRow;
@@ -9,9 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.controlsfx.control.SearchableComboBox;
 
-import java.io.IOException;
 import java.util.ArrayList;
+
+import static by.bsuir.client.service.AlertImp.showAlert;
+import static by.bsuir.client.ClientApp.connection;
+import static by.bsuir.client.ClientApp.logger;
 
 public class CarController {
     @FXML
@@ -24,7 +28,7 @@ public class CarController {
     private Button btnCarUpdate;
 
     @FXML
-    private ComboBox<Client> cbClientName;
+    private SearchableComboBox<Client> cbClientName;
 
     @FXML
     private TableColumn<CarRow, String> colBrand;
@@ -58,17 +62,6 @@ public class CarController {
 
     @FXML
     private TableView<CarRow> tvCars;
-    public static final int PORT = 1022;
-    public static final String IP = "localhost";
-    ClientConnectionModule connection = new ClientConnectionModule(IP, PORT);
-
-    {
-        try {
-            connection.connectToServer();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void initialize() {
         colCarID.setSortable(false);
@@ -128,54 +121,58 @@ public class CarController {
         }
     }
 
-    private void showAlert(String header, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setHeaderText(header);
-        alert.setContentText(message);
-        alert.showAndWait().ifPresent(rs -> {
-        });
-    }
 
     public void insertCarBtnClick(ActionEvent actionEvent) {
-        if (tfStateNum.getText() != "" && tfModel.getText() != "" && tfBrand.getText() != "" && tfVIN.getText() != "" &&
+        if (!tfStateNum.getText().equals("") && !tfModel.getText().equals("") && !tfBrand.getText().equals("") && !tfVIN.getText().equals("") &&
                 cbClientName.getValue() != null) {
-            System.out.println(cbClientName.getValue().getClientID());
             Car newCar = new Car(tfStateNum.getText(), tfVIN.getText(), tfBrand.getText(), tfModel.getText(), cbClientName.getValue().getClientID());
-            connection.createCar(newCar);
+            boolean flag = connection.createCar(newCar);
+            logger.debug(flag);
+            if(flag == true) {
+               showAlert("", "Автомобиль добавлен успешно",Alert.AlertType.INFORMATION);
+            }
             tfStateNum.clear();
             tfVIN.clear();
             tfBrand.clear();
             tfModel.clear();
             cbClientName.setValue(null);
             refreshTable();
-        } else showAlert("Invalid input", "Fill all fields at first");
+        } else showAlert("Ошибка ввода", "Пожалуйста, заполните все поля", Alert.AlertType.WARNING);
+
     }
 
     public void updateCarBtnClick(ActionEvent actionEvent) {
-        if ((tvCars.getSelectionModel().getSelectedItem() != null) && (tfStateNum.getText() != "" && tfModel.getText() != "" &&
-                tfBrand.getText() != "" && tfVIN.getText() != "" && cbClientName.getValue() != null)) {
+        if ((tvCars.getSelectionModel().getSelectedItem() != null) && (!tfStateNum.getText().equals("") && !tfModel.getText().equals("") && !tfBrand.getText().equals("") && !tfVIN.getText().equals("") &&
+                cbClientName.getValue() != null)) {
             Car car = new Car(tfStateNum.getText(), tfVIN.getText(), tfBrand.getText(), tfModel.getText(), tvCars.getSelectionModel().getSelectedItem().getCarID(), cbClientName.getValue().getClientID());
-            connection.updateCar(car);
+            boolean flag = connection.updateCar(car);
+            logger.debug(flag);
+            if(flag == true) {
+               showAlert("", "Запись о выбранном автомобиле отредактирована успешно",Alert.AlertType.INFORMATION);
+            }
             tfStateNum.clear();
             tfVIN.clear();
             tfBrand.clear();
             tfModel.clear();
             cbClientName.setValue(null);
             refreshTable();
-        } else showAlert("Invalid input", "Fill all fields at first");
+        } else showAlert("Ошибка ввода", "Пожалуйста, зааолните все поля", Alert.AlertType.WARNING);
     }
 
     public void deleteCarBtnClick(ActionEvent actionEvent) {
-        if ((tvCars.getSelectionModel().getSelectedItem() != null) && (tfStateNum.getText() != "" && tfModel.getText() != "" &&
-                tfBrand.getText() != "" && tfVIN.getText() != "" && cbClientName.getValue() != null)) {
+        if ((tvCars.getSelectionModel().getSelectedItem() != null) && (!tfStateNum.getText().equals("") && !tfModel.getText().equals("") && !tfBrand.getText().equals("") && !tfVIN.getText().equals("") &&
+                cbClientName.getValue() != null)) {
             CarRow selectedCar = tvCars.getSelectionModel().getSelectedItem();
-            connection.deleteCar(selectedCar.getCarID());
+            boolean flag = connection.deleteCar(selectedCar.getCarID());
+            if(flag == true) {
+                showAlert("", "Запись об автомобиле удалена успешно", Alert.AlertType.INFORMATION);
+            }
             tfStateNum.clear();
             tfVIN.clear();
             tfBrand.clear();
             tfModel.clear();
             cbClientName.setValue(null);
             refreshTable();
-        } else showAlert("Invalid input", "Fill all fields at first");
+        } else showAlert("Ошибка ввода", "Пожалуйста, заполните все поля", Alert.AlertType.WARNING);
     }
 }
