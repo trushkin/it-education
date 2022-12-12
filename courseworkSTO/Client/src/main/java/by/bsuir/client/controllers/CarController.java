@@ -98,7 +98,7 @@ public class CarController {
     }
 
     public void refreshTable() {
-        ArrayList<CarRow> carRowArrayList = connection.getAllCars();
+        ArrayList<CarRow> carRowArrayList = connection.LoadCarsInTable();
         tvCars.setItems(FXCollections.observableList(carRowArrayList));
     }
 

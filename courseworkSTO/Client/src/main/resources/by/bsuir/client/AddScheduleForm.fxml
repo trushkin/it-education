@@ -10,27 +10,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.controlsfx.control.SearchableComboBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.client.controllers.AddScheduleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.client.controllers.AddScheduleController">
    <children>
       <Button fx:id="btnOpenAddClientForm" layoutX="217.0" layoutY="40.0" mnemonicParsing="false" onAction="#openClientForm" prefHeight="26.0" prefWidth="30.0" text="+" />
       <Button fx:id="btnOpenAddCarForm" layoutX="489.0" layoutY="40.0" mnemonicParsing="false" onAction="#openCarForm" prefHeight="26.0" prefWidth="30.0" text="+" />
-      <TextArea fx:id="taComment" layoutX="58.0" layoutY="244.0" prefHeight="106.0" prefWidth="484.0" />
+      <TextArea fx:id="taComment" layoutX="57.0" layoutY="328.0" prefHeight="106.0" prefWidth="484.0" />
       <TextField fx:id="tfMileage" layoutX="329.0" layoutY="94.0" />
       <Label layoutX="329.0" layoutY="77.0" prefHeight="18.0" prefWidth="51.0" text="Пробег:" />
       <Label layoutX="330.0" layoutY="23.0" text="Автомобиль:" />
       <Label layoutX="58.0" layoutY="23.0" text="Клиент:" />
-      <Label layoutX="58.0" layoutY="226.0" text="Причина обращения:" />
-      <DatePicker fx:id="dtStartDate" layoutX="59.0" layoutY="142.0" prefHeight="26.0" prefWidth="161.0" />
-      <Spinner fx:id="spStartHour" layoutX="242.0" layoutY="142.0" prefHeight="26.0" prefWidth="62.0" />
-      <Spinner fx:id="spStartMin" layoutX="304.0" layoutY="142.0" prefHeight="26.0" prefWidth="62.0" />
-      <Label layoutX="58.0" layoutY="125.0" text="Дата и время начала работ:" />
-      <Spinner fx:id="spDuration" layoutX="429.0" layoutY="187.0" prefHeight="26.0" prefWidth="81.0" />
-      <Label layoutX="429.0" layoutY="168.0" text="Продолжительность работ" />
-      <Label layoutX="474.0" layoutY="191.0" text="ч." />
+      <Label layoutX="57.0" layoutY="310.0" text="Причина обращения:" />
+      <DatePicker fx:id="dtStartDate" layoutX="58.0" layoutY="226.0" prefHeight="26.0" prefWidth="161.0" />
+      <Spinner fx:id="spStartHour" layoutX="241.0" layoutY="226.0" prefHeight="26.0" prefWidth="62.0" />
+      <Spinner fx:id="spStartMin" layoutX="303.0" layoutY="226.0" prefHeight="26.0" prefWidth="62.0" />
+      <Label layoutX="57.0" layoutY="209.0" text="Дата и время начала работ:" />
+      <Spinner fx:id="spDuration" layoutX="457.0" layoutY="226.0" prefHeight="26.0" prefWidth="81.0" />
+      <Label layoutX="378.0" layoutY="204.0" text="Продолжительность работ:" />
+      <Label layoutX="541.0" layoutY="235.0" text="ч." />
       <ComboBox fx:id="cbLift" layoutX="58.0" layoutY="94.0" prefWidth="150.0" />
       <Label layoutX="58.0" layoutY="77.0" text="Подъёмник" />
-      <Button fx:id="btnScheduleInsert" layoutX="250.0" layoutY="360.0" mnemonicParsing="false" onAction="#insertScheduleButtonClick" text="Создать запись" />
+      <Button fx:id="btnScheduleInsert" layoutX="249.0" layoutY="444.0" mnemonicParsing="false" onAction="#insertScheduleButtonClick" text="Создать запись" />
       <SearchableComboBox fx:id="cbClientName" layoutX="57.0" layoutY="40.0" onAction="#cbClientClick" prefHeight="26.0" prefWidth="153.0" />
       <SearchableComboBox fx:id="cbClientCar" layoutX="327.0" layoutY="40.0" prefHeight="26.0" prefWidth="153.0" />
+      <Button fx:id="btnOpenViewPartsForm" layoutX="79.0" layoutY="153.0" mnemonicParsing="false" onAction="#openViewPartsForm" prefHeight="26.0" prefWidth="119.0" text="Выбрать запчасти" />
+      <Button fx:id="btnOpenViewOperationsForm" layoutX="355.0" layoutY="153.0" mnemonicParsing="false" onAction="#openViewOperationsForm" prefHeight="26.0" prefWidth="119.0" text="Выбрать услуги" />
    </children>
 </AnchorPane>

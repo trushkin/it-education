@@ -10,7 +10,7 @@ public class Lift implements Serializable {
 
     @Override
     public String toString() {
-        return liftType;
+        return liftName;
     }
 
     public void setLiftID(int liftID) {

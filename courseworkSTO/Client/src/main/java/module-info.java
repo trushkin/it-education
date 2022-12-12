@@ -5,6 +5,7 @@ module by.bsuir.client {
     requires pojo;
     requires java.sql;
     requires org.controlsfx.controls;
+    requires org.apache.commons.codec;
 
     opens by.bsuir.client to javafx.fxml;
     exports by.bsuir.client;

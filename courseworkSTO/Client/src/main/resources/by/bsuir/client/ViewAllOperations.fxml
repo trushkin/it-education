@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="658.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.client.controllers.ViewAllOperations">
+   <children>
+      <TableView fx:id="tvAvailable" layoutX="-2.0" layoutY="7.0" prefHeight="306.0" prefWidth="558.0">
+         <columns>
+            <TableColumn fx:id="availableColOperationId" prefWidth="75.20001220703125" text="Id" />
+            <TableColumn fx:id="availableColOperationName" prefWidth="279.19994354248047" text="Услуга" />
+            <TableColumn fx:id="availableColOperationCost" prefWidth="199.20010375976562" text="Стоимость" />
+         </columns>
+      </TableView>
+      <TableView fx:id="tvSelected" layoutX="-2.0" layoutY="345.0" prefHeight="298.0" prefWidth="558.0">
+         <columns>
+            <TableColumn fx:id="selectedColOperationId" prefWidth="75.20001220703125" text="Id" />
+            <TableColumn fx:id="selectedColOperationName" prefWidth="279.19994354248047" text="Услуга" />
+            <TableColumn fx:id="selectedColOperationCost" prefWidth="199.20010375976562" text="Стоимость" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnAddToSelected" layoutX="139.0" layoutY="316.0" mnemonicParsing="false" onAction="#addToSelected" text="Выбрать услугу" />
+      <Button fx:id="btnRemoveFromSelected" layoutX="333.0" layoutY="316.0" mnemonicParsing="false" onAction="#removeFromSelected" text="Удалить из выбранного" />
+   </children>
+</AnchorPane>

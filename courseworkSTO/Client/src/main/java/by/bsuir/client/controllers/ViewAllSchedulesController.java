@@ -106,7 +106,7 @@ public class ViewAllSchedulesController {
 
         colLift.setSortable(true);
         colLift.setResizable(false);
-        colLift.setCellValueFactory(new PropertyValueFactory<SchedulePrint, String>("liftType"));
+        colLift.setCellValueFactory(new PropertyValueFactory<SchedulePrint, String>("liftName"));
         colLift.setStyle("-fx-alignment: center");
         refreshTable();
         loadClientCB();

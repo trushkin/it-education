@@ -12,7 +12,7 @@ public class SchedulePrint implements Serializable {
     private LocalDateTime startDate;
     private int duration;
     private int scheduleID;
-    private String liftType;
+    private String liftName;
     private String comment;
 
 
@@ -26,7 +26,7 @@ public class SchedulePrint implements Serializable {
         this.startDate = startDate;
         this.duration = duration;
         this.scheduleID = scheduleID;
-        this.liftType = liftName;
+        this.liftName = liftName;
         this.comment = comment;
 
     }
@@ -76,8 +76,8 @@ public class SchedulePrint implements Serializable {
     public int getDuration() {
         return duration;
     }
-    public String getLiftType() {
-        return liftType;
+    public String getLiftName() {
+        return liftName;
     }
 
     public String getComment() {

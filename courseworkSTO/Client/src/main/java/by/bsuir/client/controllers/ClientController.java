@@ -116,7 +116,7 @@ public class ClientController {
             tfMobNum.clear();
             refreshTable();
         } else {
-            showAlert("Ошибка ввода", "Пожалуйста, зааолните все поля", Alert.AlertType.WARNING);
+            showAlert("Ошибка ввода", "Пожалуйста, заполните все поля", Alert.AlertType.WARNING);
         }
         refreshTable();
     }
@@ -138,8 +138,9 @@ public class ClientController {
             refreshTable();
         }
         else {
-            showAlert("Ошибка ввода", "Пожалуйста, зааолните все поля", Alert.AlertType.WARNING);
+            showAlert("Ошибка ввода", "Пожалуйста, заполните все поля", Alert.AlertType.WARNING);
         }
+        refreshTable();
     }
 
     public void updateClientBtnClick(ActionEvent actionEvent) {
@@ -147,7 +148,7 @@ public class ClientController {
             Client client = new Client(tfName.getText(), tfSurname.getText(), tfPatronymic.getText(), tfMobNum.getText(), tvClients.getSelectionModel().getSelectedItem().getClientID());
             boolean flag  = connection.updateClient(client);
             if(flag == true){
-                showAlert("", "Запись о клиенте удалена успешно", Alert.AlertType.INFORMATION);
+                showAlert("", "Запись о клиенте обновлена успешно", Alert.AlertType.INFORMATION);
             }
             tfName.clear();
             tfSurname.clear();
@@ -156,7 +157,7 @@ public class ClientController {
             refreshTable();
         }
         else {
-            showAlert("Ошибка ввода", "Пожалуйста, зааолните все поля", Alert.AlertType.WARNING);
+            showAlert("Ошибка ввода", "Пожалуйста, заполните все поля", Alert.AlertType.WARNING);
         }
     }
 }

@@ -1,12 +1,11 @@
 package by.bsuir.client.controllers;
 
-import by.pojo.Car;
-import by.pojo.Client;
-import by.pojo.Lift;
-import by.pojo.Properties;
+import by.bsuir.client.service.ScheduleCheck;
+import by.pojo.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import static by.bsuir.client.ClientApp.connection;
-
 import static by.bsuir.client.service.AlertImp.showAlert;
 
 public class AddScheduleController {
@@ -37,6 +36,11 @@ public class AddScheduleController {
 
     @FXML
     private Button btnScheduleInsert;
+    @FXML
+    private Button btnOpenViewOperationsForm;
+
+    @FXML
+    private Button btnOpenViewPartsForm;
 
     @FXML
     private SearchableComboBox<Car> cbClientCar;
@@ -65,23 +69,27 @@ public class AddScheduleController {
     @FXML
     private TextField tfMileage;
     private static Logger logger = LogManager.getLogger();
+    public static ObservableList<Parts> selectedParts = FXCollections.observableArrayList();
+    public static ObservableList<Operation> selectedOperations = FXCollections.observableArrayList();
+
 
     public void initialize() {
         Properties properties = connection.getWorkingHours();
-            loadClientCB();
-            spStartHour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(properties.getStartWorkTime().getHour(), properties.getEndWorkTime().getHour() - 1));
-            spStartMin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0, 30));
-            spDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24));
-            tfMileage.textProperty().addListener(new ChangeListener<String>() {
-                @Override
-                public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                    String newValue) {
-                    if (!newValue.matches("\\d*")) {
-                        tfMileage.setText(newValue.replaceAll("[^\\d]", ""));
-                    }
+        loadClientCB();
+        spStartHour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(properties.getStartWorkTime().getHour(), properties.getEndWorkTime().getHour() - 1));
+        spStartMin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0, 30));
+        spDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24));
+        cbLift.setItems(FXCollections.observableArrayList(connection.getAllLifts()));
+        tfMileage.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    tfMileage.setText(newValue.replaceAll("[^\\d]", ""));
                 }
-            });
-        }
+            }
+        });
+    }
 
 
     public void loadClientCB() {
@@ -141,27 +149,60 @@ public class AddScheduleController {
         stage.showAndWait();
     }
 
-    public void insertScheduleButtonClick(ActionEvent actionEvent) {
-//        if ((cbClientName.getValue() != null && cbClientCar.getValue() != null && cbLift.getValue() != null && dtStartDate.getValue() != null && //проверка на заполнение всех полей
-//                spStartHour.getValue() != null && spStartMin.getValue() != null && spDuration.getValue() != null && taComment.getText() != "" && tfMileage.getText() != "") &&
-//                Schedule.checkTimeInterval(LocalDateTime.of(dtStartDate.getValue().getYear(), dtStartDate.getValue().getMonthValue(), // проверка пересечение
-//                                dtStartDate.getValue().getDayOfMonth(), spStartHour.getValue(), spStartMin.getValue()), spDuration.getValue(),
-//                        cbLift.getValue().getLiftID()))
-//        {
-//            try {
-//                Schedule.addSchedule(cbClientName.getValue().getClientID(), cbClientCar.getValue().getCarID(), cbLift.getValue().getLiftID(),
-//                        LocalDateTime.of(dtStartDate.getValue().getYear(), dtStartDate.getValue().getMonthValue(), dtStartDate.getValue().getDayOfMonth(),
-//                                spStartHour.getValue(), spStartMin.getValue()), spDuration.getValue(), taComment.getText(), Integer.parseInt(tfMileage.getText()));
-//            } catch (SQLException e) {
-//                e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
-//                //System.out.println("Ошибка SQL !");
-//                logger.error("Creating schedule error");
-//            }
-//            Stage stage = (Stage) btnScheduleInsert.getScene().getWindow();
-//            stage.close();
-//        } else {
-//           showAlert("Ошибка", "Желаемое время уже занято или не все поля заполнены!", Alert.AlertType.ERROR);
-//        }
+    public void insertScheduleButtonClick(ActionEvent actionEvent) throws SQLException {
+        if ((cbClientName.getValue() != null && cbClientCar.getValue() != null && cbLift.getValue() != null && dtStartDate.getValue() != null && //проверка на заполнение всех полей
+                spStartHour.getValue() != null && spStartMin.getValue() != null && spDuration.getValue() != null && taComment.getText() != "" && tfMileage.getText() != "") &&
+                ScheduleCheck.checkTimeInterval(LocalDateTime.of(dtStartDate.getValue().getYear(), dtStartDate.getValue().getMonthValue(), // проверка пересечение
+                                dtStartDate.getValue().getDayOfMonth(), spStartHour.getValue(), spStartMin.getValue()), spDuration.getValue(),
+                        cbLift.getValue().getLiftID())) {
+            connection.createSchedule(new Schedule(cbClientName.getValue().getClientID(), cbClientCar.getValue().getCarID(), cbLift.getValue().getLiftID(),
+                    LocalDateTime.of(dtStartDate.getValue().getYear(), dtStartDate.getValue().getMonthValue(), dtStartDate.getValue().getDayOfMonth(),
+                            spStartHour.getValue(), spStartMin.getValue()), spDuration.getValue(), taComment.getText(), Integer.parseInt(tfMileage.getText()), new ArrayList<Parts>(selectedParts),  new ArrayList<Operation>(selectedOperations)));
+
+            Stage stage = (Stage) btnScheduleInsert.getScene().getWindow();
+            stage.close();
+        } else {
+            showAlert("Ошибка", "Желаемое время уже занято или не все поля заполнены!", Alert.AlertType.ERROR);
+        }
 
     }
+
+    public void openViewPartsForm(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL temp = getClass().getResource("/by/bsuir/client/ViewAllPartsForm.fxml");
+
+        loader.setLocation(temp);
+        Parent root = loader.load();
+
+        //создание нового окна
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        //блокировка главного окна
+        stage.initOwner(this.btnOpenViewPartsForm.getScene().getWindow());
+        //ожидание закрытия окна
+        stage.showAndWait();
+    }
+
+    public void openViewOperationsForm(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        URL temp = getClass().getResource("/by/bsuir/client/ViewAllOperationsForm.fxml");
+
+        loader.setLocation(temp);
+        Parent root = loader.load();
+
+        //создание нового окна
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        //блокировка главного окна
+        stage.initOwner(this.btnOpenViewPartsForm.getScene().getWindow());
+        //ожидание закрытия окна
+        stage.showAndWait();
+
+    }
+
 }

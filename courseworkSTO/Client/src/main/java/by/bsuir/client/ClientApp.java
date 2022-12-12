@@ -29,8 +29,8 @@ public class ClientApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientApp.class.getResource("MainForm.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientApp.class.getResource("LoginForm.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 300, 320);
         stage.setTitle("АСУ Автосервис");
         stage.setScene(scene);
         stage.show();

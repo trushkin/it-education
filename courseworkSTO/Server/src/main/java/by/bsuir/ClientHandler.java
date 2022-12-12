@@ -1,16 +1,29 @@
 package by.bsuir;
 
 import by.bsuir.car.*;
+import by.bsuir.charts.GetInfoToBarCharCommand;
 import by.bsuir.client.CreateClientCommand;
 import by.bsuir.client.DeleteClientCommand;
 import by.bsuir.client.GetAllClientsCommand;
 import by.bsuir.client.UpdateClientCommand;
 import by.bsuir.lift.GetAllLiftsCommand;
+import by.bsuir.operation.CreateOperationCommand;
+import by.bsuir.operation.DeleteOperationCommand;
+import by.bsuir.operation.GetAllOperationsCommand;
+import by.bsuir.operation.UpdateOperationCommand;
+import by.bsuir.parts.CreatePartCommand;
+import by.bsuir.parts.DeletePartCommand;
+import by.bsuir.parts.GetAllPartsCommand;
+import by.bsuir.parts.UpdatePartCommand;
 import by.bsuir.properties.GetWorkingHoursCommand;
+import by.bsuir.schedule.CreateScheduleCommand;
 import by.bsuir.schedule.DeleteScheduleCommand;
+import by.bsuir.schedule.GetAllSchedules;
 import by.bsuir.schedule.GetSchedulesToPrintCommand;
 import by.bsuir.service.ClientConnector;
 import by.bsuir.service.ConnectedClientInfo;
+import by.bsuir.user.CreateUserCommand;
+import by.bsuir.user.LoginCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -57,7 +70,7 @@ public class ClientHandler extends Thread {
         };
         while (true) {
             String command = receiveObject();
-            logger.info("Receive command: " + command);
+            logger.info("Received command: " + command);
             switch (command) {
                 case "GET_ALL_CLIENTS" -> {
                     GetAllClientsCommand getAllClientsCommand = new GetAllClientsCommand(clientConnector);
@@ -75,8 +88,8 @@ public class ClientHandler extends Thread {
                     UpdateClientCommand updateClientCommand = new UpdateClientCommand(clientConnector);
                     updateClientCommand.execute();
                 }
-                case "GET_ALL_CARS" -> {
-                    GetAllCarsCommand getAllCarsCommand = new GetAllCarsCommand(clientConnector);
+                case "LOAD_CARS_IN_TABLE" -> {
+                    LoadCarsInTableCommand getAllCarsCommand = new LoadCarsInTableCommand(clientConnector);
                     getAllCarsCommand.execute();
                 }
                 case "CREATE_CAR" -> {
@@ -110,6 +123,62 @@ public class ClientHandler extends Thread {
                 case "GET_ALL_LIFTS" -> {
                     GetAllLiftsCommand getAllLiftsCommand = new GetAllLiftsCommand(clientConnector);
                     getAllLiftsCommand.execute();
+                }
+                case "GET_ALL_CARS" -> {
+                    GetAllCarsCommand getAllCarsCommand = new GetAllCarsCommand(clientConnector);
+                    getAllCarsCommand.execute();
+                }
+                case "GET_ALL_SCHEDULES" -> {
+                    GetAllSchedules getAllSchedules = new GetAllSchedules(clientConnector);
+                    getAllSchedules.execute();
+                }
+                case "GET_ALL_OPERATIONS" -> {
+                    GetAllOperationsCommand getAllOperationsCommand = new GetAllOperationsCommand(clientConnector);
+                    getAllOperationsCommand.execute();
+                }
+                case "DELETE_OPERATION" -> {
+                    DeleteOperationCommand deleteOperationCommand = new DeleteOperationCommand(clientConnector);
+                    deleteOperationCommand.execute();
+                }
+                case "CREATE_OPERATION" -> {
+                    CreateOperationCommand createOperationCommand = new CreateOperationCommand(clientConnector);
+                    createOperationCommand.execute();
+                }
+                case "UPDATE_OPERATION" -> {
+                    UpdateOperationCommand updateOperationCommand = new UpdateOperationCommand(clientConnector);
+                    updateOperationCommand.execute();
+                }
+                case "GET_ALL_PARTS" -> {
+                    GetAllPartsCommand getAllPartsCommand = new GetAllPartsCommand(clientConnector);
+                    getAllPartsCommand.execute();
+                }
+                case "CREATE_PART" -> {
+                    CreatePartCommand createPartCommand = new CreatePartCommand(clientConnector);
+                    createPartCommand.execute();
+                }
+                case "DELETE_PART" -> {
+                    DeletePartCommand deletePartCommand = new DeletePartCommand(clientConnector);
+                    deletePartCommand.execute();
+                }
+                case "UPDATE_PART" -> {
+                    UpdatePartCommand updatePartCommand = new UpdatePartCommand(clientConnector);
+                    updatePartCommand.execute();
+                }
+                case "CREATE_SCHEDULE" -> {
+                    CreateScheduleCommand createScheduleCommand = new CreateScheduleCommand(clientConnector);
+                    createScheduleCommand.execute();
+                }
+                case "GET_INFO_TO_BARCHART" -> {
+                    GetInfoToBarCharCommand getInfoToBarCharCommand = new GetInfoToBarCharCommand(clientConnector);
+                    getInfoToBarCharCommand.execute();
+                }
+                case "LOGIN" -> {
+                    LoginCommand loginCommand = new LoginCommand(clientConnector);
+                    loginCommand.execute();
+                }
+                case "CREATE_USER" -> {
+                    CreateUserCommand createUserCommand = new CreateUserCommand(clientConnector);
+                    createUserCommand.execute();
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + command);
             }

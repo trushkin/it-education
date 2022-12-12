@@ -1,10 +1,8 @@
 package by.bsuir.properties;
 
-import by.bsuir.schedule.GetSchedulesToPrintCommand;
 import by.bsuir.service.ClientConnector;
 import by.bsuir.service.DatabaseConnection;
 import by.bsuir.service.ManageCommand;
-import by.pojo.CarRow;
 import by.pojo.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,8 +30,6 @@ public class GetWorkingHoursCommand implements ManageCommand {
               properties.setStartWorkTime(resultSet.getTime(1).toLocalTime());
               properties.setEndWorkTime(resultSet.getTime(2).toLocalTime());
             }
-            logger.debug(properties.getStartWorkTime());
-            logger.debug(properties.getEndWorkTime());
             clientConnector.sendObject(properties);
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -1,10 +1,8 @@
 package by.bsuir.client.controllers;
 
+import by.bsuir.client.service.ScheduleCheck;
 import by.bsuir.client.service.ScheduleRow;
-import by.pojo.Car;
-import by.pojo.Lift;
-import by.pojo.Schedule;
-import by.pojo.SchedulePrint;
+import by.pojo.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,19 +19,17 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
-import static by.bsuir.client.service.AlertImp.showAlert;
 import static by.bsuir.client.ClientApp.connection;
-
+import static by.bsuir.client.controllers.LoginController.role;
 public class MainScreenController {
-
+    @FXML
+    private MenuButton adminMenu;
     @FXML
     private Button btnAddCar;
 
@@ -45,6 +41,8 @@ public class MainScreenController {
 
     @FXML
     private Button btnViewAllSchedules;
+    @FXML
+    private Button btnLogout;
 
     @FXML
     private DatePicker dtCurrentDate;
@@ -52,11 +50,89 @@ public class MainScreenController {
     @FXML
     private TableView<ScheduleRow> tvSchedule;
     public static Logger logger = LogManager.getLogger();
-    private static ArrayList<Lift> liftArrayList;
+    private static ArrayList<Lift> liftArrayList = connection.getAllLifts();
 
     public void initialize() {
+        if(role.equals("Receptionist"))
+        {
+            adminMenu.setVisible(false);
+        }
         dtCurrentDate.setValue(LocalDate.now());
         refreshTable();
+        tvSchedule.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tvSchedule.getSelectionModel().setCellSelectionEnabled(true);
+    }
+
+    public void onMenuPartClick(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL temp = getClass().getResource("/by/bsuir/client/PartForm.fxml");
+        loader.setLocation(temp);
+        Parent root = loader.load();
+        //создание нового окна
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        //блокировка главного окна
+        stage.initOwner(this.btnAddCar.getScene().getWindow());
+        //ожидание закрытия окна
+        stage.showAndWait();
+        tvSchedule.getColumns().clear();
+        refreshTable();
+    }
+
+    public void onMenuOperationClick(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL temp = getClass().getResource("/by/bsuir/client/OperationForm.fxml");
+        loader.setLocation(temp);
+        Parent root = loader.load();
+        //создание нового окна
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        //блокировка главного окна
+        stage.initOwner(this.btnAddCar.getScene().getWindow());
+        //ожидание закрытия окна
+        stage.showAndWait();
+        tvSchedule.getColumns().clear();
+        refreshTable();
+    }
+
+    public void onMenuChartsClicked(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL temp = getClass().getResource("/by/bsuir/client/BarChartForm.fxml");
+        loader.setLocation(temp);
+        Parent root = loader.load();
+        //создание нового окна
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        //блокировка главного окна
+        stage.initOwner(this.btnAddCar.getScene().getWindow());
+        //ожидание закрытия окна
+        stage.showAndWait();
+        tvSchedule.getColumns().clear();
+        refreshTable();
+    }
+
+    public void onBtnLogoutClick(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL temp = getClass().getResource("/by/bsuir/client/LoginForm.fxml");
+        loader.setLocation(temp);
+        Parent root = loader.load();
+        Stage stage = (Stage) btnAddCar.getScene().getWindow();
+        stage.close();
+        //создание нового окна
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.initModality(Modality.WINDOW_MODAL);
+        //блокировка главного окна
+        newStage.initOwner(this.btnAddCar.getScene().getWindow());
+        //ожидание закрытия окна
+        newStage.setTitle("АСУ Автосервис");
+        newStage.show();
     }
 
     class ColoredTableCell extends TableCell<ScheduleRow, String> {
@@ -94,8 +170,8 @@ public class MainScreenController {
         stage.initOwner(this.btnAddCar.getScene().getWindow());
         //ожидание закрытия окна
         stage.showAndWait();
-//        tvSchedule.getColumns().clear();
-//        refreshTable();
+        tvSchedule.getColumns().clear();
+        refreshTable();
     }
 
     public void onAddScheduleBtnClick(ActionEvent actionEvent) throws IOException {
@@ -114,8 +190,8 @@ public class MainScreenController {
         stage.initOwner(this.btnAddClient.getScene().getWindow());
         //ожидание закрытия окна
         stage.showAndWait();
-//        tvSchedule.getColumns().clear();
-//        refreshTable();
+        tvSchedule.getColumns().clear();
+        refreshTable();
     }
 
     public void onClientBtnClick(ActionEvent actionEvent) throws IOException {
@@ -132,8 +208,8 @@ public class MainScreenController {
         stage.initOwner(this.btnAddClient.getScene().getWindow());
         //ожидание закрытия окна
         stage.showAndWait();
-//        tvSchedule.getColumns().clear();
-//        refreshTable();
+        tvSchedule.getColumns().clear();
+        refreshTable();
     }
 
     public void onViewAllSchedulesBtnClick(ActionEvent actionEvent) throws IOException {
@@ -152,23 +228,14 @@ public class MainScreenController {
         stage.initOwner(this.btnAddClient.getScene().getWindow());
         //ожидание закрытия окна
         stage.showAndWait();
-//        tvSchedule.getColumns().clear();
-//        refreshTable();
+        tvSchedule.getColumns().clear();
+        refreshTable();
     }
 
     public void refreshTable() {
         ObservableList<ScheduleRow> scheduleRowObservableList = FXCollections.observableArrayList();
         tvSchedule.setItems(scheduleRowObservableList);
-
-//        try {
-//            scheduleRowObservableList.addAll(getScheduleRows());
-//        } catch (SQLException e) {
-//            //System.out.println("Ошибка SQL !");
-//            logger.error("Inserting all schedules in a list error");
-//            e.printStackTrace();
-//
-//        }
-
+        scheduleRowObservableList.addAll(getScheduleRows());
         TableColumn<ScheduleRow, String> timeColumn = new TableColumn<>("Time");
         timeColumn.setCellValueFactory(new PropertyValueFactory<ScheduleRow, String>("time"));
 
@@ -181,7 +248,7 @@ public class MainScreenController {
         liftArrayList = connection.getAllLifts();
         //lift loop
         for (Lift curLift : liftArrayList) {
-            TableColumn<ScheduleRow, String> liftColumn = new TableColumn<>(curLift.getLiftType());
+            TableColumn<ScheduleRow, String> liftColumn = new TableColumn<>(curLift.getLiftName());
             liftColumn.setCellValueFactory(p -> p.getValue().getSchedulePerLift(curLift.getLiftID()));
             liftColumn.setCellFactory(p -> new ColoredTableCell());
             tvSchedule.getColumns().add(liftColumn);
@@ -190,22 +257,23 @@ public class MainScreenController {
             liftColumn.setSortable(false);
         }
 
+
     }
 
-    private List<ScheduleRow> getScheduleRows() throws SQLException {
+    private List<ScheduleRow> getScheduleRows() {
         //load all schedules from DB
-        List<Schedule> scheduleList = Schedule.loadSchedule();
-        List<Car> carList = Car.loadAllCars();
+        List<Schedule> scheduleList = connection.getAllSchedules();
+        List<Car> carList = connection.getAllCars();
         List<ScheduleRow> scheduleRowList = new ArrayList();
         ObservableList<LocalTime> timeline = getTimeline();
         for (LocalTime t : timeline) {
             ScheduleRow curRow = new ScheduleRow(t.getHour() + ":" + (t.getMinute() == 0 ? "00" : "30"));
             for (Lift curLift : liftArrayList) {
-                Schedule s = Schedule.findSchedule(LocalDateTime.of(dtCurrentDate.getValue().getYear(),
+                Schedule s = ScheduleCheck.findSchedule(LocalDateTime.of(dtCurrentDate.getValue().getYear(),
                         dtCurrentDate.getValue().getMonthValue(), dtCurrentDate.getValue().getDayOfMonth(), t.getHour(),
                         t.getMinute()), 0.5, scheduleList, curLift.getLiftID());
                 if (s != null) {
-                    Car c = Car.getCarByID(s.getCarID(), carList);
+                    Car c = getCarByID(s.getCarID(), carList);
                     SchedulePrint cell = new SchedulePrint(c.getStateNum(), c.getBrand(), c.getModel(), s.getScheduleID());
                     if (scheduleRowList.size() > 0) { //выводить информацию о записи только в первой ячейке, а не во всех
                         //загружаем из timeline расписание из последней строки и сравниваем с новым
@@ -225,18 +293,27 @@ public class MainScreenController {
         return scheduleRowList;
     }
 
-    public static ObservableList<LocalTime> getTimeline()
-    {
-        by.pojo.Properties properties = connection.getWorkingHours();
+    public static ObservableList<LocalTime> getTimeline() {
+        Properties properties = connection.getWorkingHours();
         ObservableList<LocalTime> timeline = FXCollections.observableArrayList();
-        for (int i = properties.getStartWorkTime().getHour(); i < properties.getEndWorkTime().getHour(); i++)
-        {
+        for (int i = properties.getStartWorkTime().getHour(); i < properties.getEndWorkTime().getHour(); i++) {
             timeline.add(LocalTime.of(i, 0));
             timeline.add(LocalTime.of(i, 30));
         }
         return timeline;
     }
 
+    public Car getCarByID(int carID, List<Car> carList) {
+        for (Car temp : carList) {
+            if (temp.getCarID() == carID)
+                return temp;
+        }
+        return null;
+    }
+
     public void OnDtClick(ActionEvent actionEvent) {
+        ObservableList<ScheduleRow> scheduleRowObservableList = FXCollections.observableArrayList();
+        tvSchedule.setItems(scheduleRowObservableList);
+        scheduleRowObservableList.addAll(getScheduleRows());
     }
 }

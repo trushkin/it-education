@@ -5,6 +5,7 @@ import by.pojo.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ClientConnectionModule {
@@ -75,7 +76,26 @@ public class ClientConnectionModule {
         }
     }
 
-    public ArrayList<CarRow> getAllCars() {
+    public ArrayList<CarRow> LoadCarsInTable() {
+        try {
+            sendObject("LOAD_CARS_IN_TABLE");
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Car> loadClientCarsInCB(int clientId) {
+        try {
+            sendObject("LOAD_CLIENT_CARS_IN_CB");
+            sendObject(clientId);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Car> getAllCars() {
         try {
             sendObject("GET_ALL_CARS");
             return receiveObject();
@@ -123,17 +143,17 @@ public class ClientConnectionModule {
         }
     }
 
-    public ArrayList<Car> loadClientCarsInCB(int clientId) {
+    public ArrayList<Schedule> getAllSchedules() {
         try {
-            sendObject("LOAD_CLIENT_CARS_IN_CB");
-            sendObject(clientId);
+            sendObject("GET_ALL_SCHEDULES");
             return receiveObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
-    public boolean deleteSchedule(int scheduleId){
-        try{
+
+    public boolean deleteSchedule(int scheduleId) {
+        try {
             sendObject("DELETE_SCHEDULE");
             sendObject(scheduleId);
             return receiveObject();
@@ -141,8 +161,9 @@ public class ClientConnectionModule {
             throw new RuntimeException(e);
         }
     }
-    public Properties getWorkingHours(){
-        try{
+
+    public Properties getWorkingHours() {
+        try {
             sendObject("GET_WORKING_HOURS");
             return receiveObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -150,13 +171,133 @@ public class ClientConnectionModule {
         }
     }
 
-    public ArrayList<Lift> getAllLifts(){
-        try{
+    public ArrayList<Lift> getAllLifts() {
+        try {
             sendObject("GET_ALL_LIFTS");
             return receiveObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public ArrayList<Operation> getAllOperations() {
+        try {
+            sendObject("GET_ALL_OPERATIONS");
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean deleteOperation(int operationId) {
+        try {
+            sendObject("DELETE_OPERATION");
+            sendObject(operationId);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Boolean createOperation(Operation operation) {
+        try {
+            sendObject("CREATE_OPERATION");
+            sendObject(operation);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean updateOperation(Operation operation) {
+        try {
+            sendObject("UPDATE_OPERATION");
+            sendObject(operation);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Parts> getAllParts() {
+        try {
+            sendObject("GET_ALL_PARTS");
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean deletePart(int partId) {
+        try {
+            sendObject("DELETE_PART");
+            sendObject(partId);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Boolean createPart(Parts part) {
+        try {
+            sendObject("CREATE_PART");
+            sendObject(part);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean updatePart(Parts part) {
+        try {
+            sendObject("UPDATE_PART");
+            sendObject(part);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Boolean createSchedule(Schedule schedule) {
+        try {
+            sendObject("CREATE_SCHEDULE");
+            sendObject(schedule);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<InfoToBarChart> getInfoToBarChart(LocalDateTime date) {
+        try {
+            sendObject("GET_INFO_TO_BARCHART");
+            sendObject(date);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User login(User user) {
+        try {
+            sendObject("LOGIN");
+            sendObject(user);
+            return receiveObject();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean createUser(User user){
+        try {
+            sendObject("CREATE_USER");
+            sendObject(user);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
 
