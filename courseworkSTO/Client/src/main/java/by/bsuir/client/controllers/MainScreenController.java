@@ -1,8 +1,10 @@
 package by.bsuir.client.controllers;
 
+import by.bsuir.client.service.BuildReport;
 import by.bsuir.client.service.ScheduleCheck;
 import by.bsuir.client.service.ScheduleRow;
 import by.pojo.*;
+import com.itextpdf.text.DocumentException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +26,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import by.bsuir.client.service.BuildReport;
 import static by.bsuir.client.ClientApp.connection;
 import static by.bsuir.client.controllers.LoginController.role;
 public class MainScreenController {
@@ -133,6 +135,16 @@ public class MainScreenController {
         //ожидание закрытия окна
         newStage.setTitle("АСУ Автосервис");
         newStage.show();
+    }
+
+    public void onMenuReportClicked(ActionEvent actionEvent) {
+        try {
+            BuildReport.createReport(connection.getSchedulesToPrint(), dtCurrentDate.getValue());
+        } catch (DocumentException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     class ColoredTableCell extends TableCell<ScheduleRow, String> {

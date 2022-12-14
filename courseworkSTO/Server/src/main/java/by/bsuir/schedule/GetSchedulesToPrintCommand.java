@@ -37,6 +37,36 @@ public class GetSchedulesToPrintCommand implements ManageCommand {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        for (SchedulePrint temp : scheduleList) {
+            String comment;
+            selectSql = "SELECT Parts.PartName, Parts.PartCost FROM Parts inner join SchedulePart on SchedulePart.PartID = Parts.PartId WHERE SchedulePart.ScheduleID = " + temp.getScheduleID() + " ";
+            try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(selectSql)) {
+                ResultSet resultSet = statement.executeQuery();
+                comment = temp.getComment();
+                temp.setComment("Причина обращения:\n" + comment);
+                comment = temp.getComment();
+                temp.setComment(comment + "\n\nЗапчасти:\n");
+                comment = temp.getComment();
+                while (resultSet.next()) {
+                    comment = comment + resultSet.getString("PartName") + "  " + "Цена: " + resultSet.getInt("PartCost") + "\n";
+                    temp.setComment(comment);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            selectSql = "SELECT Operations.OperationName, Operations.OperationCost FROM Operations inner join ScheduleOperation on ScheduleOperation.OperationID = Operations.OperationId WHERE ScheduleOperation.ScheduleID = " + temp.getScheduleID() + " ";
+            try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(selectSql)) {
+                ResultSet resultSet = statement.executeQuery();
+                temp.setComment(comment + "\nРаботы:\n");
+                comment = temp.getComment();
+                while (resultSet.next()) {
+                    comment = comment + resultSet.getString("OperationName") + "  " + "Цена: " + resultSet.getInt("OperationCost") + "\n";
+                    temp.setComment(comment);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
             clientConnector.sendObject(scheduleList);
             logger.debug("Car list to tableView sent");
@@ -45,3 +75,4 @@ public class GetSchedulesToPrintCommand implements ManageCommand {
         }
     }
 }
+

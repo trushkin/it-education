@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.SearchableComboBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.client.controllers.ViewAllSchedulesController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.client.controllers.ViewAllSchedulesController">
    <children>
       <HBox prefHeight="26.0" prefWidth="948.0">
          <children>
@@ -34,6 +34,6 @@
             <TableColumn fx:id="colLift" prefWidth="149.60009765625" text="Подъёмник" />
         </columns>
       </TableView>
-      <TextArea fx:id="taComment" editable="false" prefHeight="126.0" prefWidth="955.0" promptText="Причина обращения:" />
+      <TextArea fx:id="taComment" editable="false" prefHeight="210.0" prefWidth="955.0" promptText="Причина обращения:" />
    </children>
 </VBox>

@@ -298,6 +298,33 @@ public class ClientConnectionModule {
             throw new RuntimeException(e);
         }
     }
+    public ArrayList<User> getAllUsers(){
+        try {
+            sendObject("GET_ALL_USERS");
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean deleteUser(int userId) {
+        try {
+            sendObject("DELETE_USER");
+            sendObject(userId);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean updateUser(User user) {
+        try {
+            sendObject("UPDATE_USER");
+            sendObject(user);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
 

@@ -18,12 +18,11 @@ import by.bsuir.parts.UpdatePartCommand;
 import by.bsuir.properties.GetWorkingHoursCommand;
 import by.bsuir.schedule.CreateScheduleCommand;
 import by.bsuir.schedule.DeleteScheduleCommand;
-import by.bsuir.schedule.GetAllSchedules;
+import by.bsuir.schedule.GetAllSchedulesCommand;
 import by.bsuir.schedule.GetSchedulesToPrintCommand;
 import by.bsuir.service.ClientConnector;
 import by.bsuir.service.ConnectedClientInfo;
-import by.bsuir.user.CreateUserCommand;
-import by.bsuir.user.LoginCommand;
+import by.bsuir.user.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -70,7 +69,9 @@ public class ClientHandler extends Thread {
         };
         while (true) {
             String command = receiveObject();
-            logger.info("Received command: " + command);
+            if (!command.equals("GET_WORKING_HOURS")) {
+                logger.info("Received command: " + command);
+            }
             switch (command) {
                 case "GET_ALL_CLIENTS" -> {
                     GetAllClientsCommand getAllClientsCommand = new GetAllClientsCommand(clientConnector);
@@ -129,7 +130,7 @@ public class ClientHandler extends Thread {
                     getAllCarsCommand.execute();
                 }
                 case "GET_ALL_SCHEDULES" -> {
-                    GetAllSchedules getAllSchedules = new GetAllSchedules(clientConnector);
+                    GetAllSchedulesCommand getAllSchedules = new GetAllSchedulesCommand(clientConnector);
                     getAllSchedules.execute();
                 }
                 case "GET_ALL_OPERATIONS" -> {
@@ -179,6 +180,18 @@ public class ClientHandler extends Thread {
                 case "CREATE_USER" -> {
                     CreateUserCommand createUserCommand = new CreateUserCommand(clientConnector);
                     createUserCommand.execute();
+                }
+                case "GET_ALL_USERS" -> {
+                    GetAllUsersCommand getAllUsersCommand = new GetAllUsersCommand(clientConnector);
+                    getAllUsersCommand.execute();
+                }
+                case "DELETE_USER" -> {
+                    DeleteUserCommand deleteUserCommand = new DeleteUserCommand(clientConnector);
+                    deleteUserCommand.execute();
+                }
+                case "UPDATE_USER" -> {
+                    UpdateUserCommand updateUserCommand = new UpdateUserCommand(clientConnector);
+                    updateUserCommand.execute();
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + command);
             }

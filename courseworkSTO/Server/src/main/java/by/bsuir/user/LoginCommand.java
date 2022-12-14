@@ -22,7 +22,6 @@ public class LoginCommand implements ManageCommand {
 
     @Override
     public void execute() {
-        logger.debug("asd");
         User user;
         try {
             user = clientConnector.receiveObject();
@@ -32,11 +31,10 @@ public class LoginCommand implements ManageCommand {
             throw new RuntimeException(e);
         }
         String selectSql = "SELECT * FROM Users WHERE Login = '" + user.getLogin() + "' AND Password = '" + user.getPassword() + "'";
-       logger.debug(selectSql);
         try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(selectSql)) {
             ResultSet resultSet = statement.executeQuery();
             user = null;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 user = new User(resultSet.getInt("UserID"), resultSet.getString("Login"), resultSet.getString("Password"), resultSet.getString("Role"));
             }
         } catch (SQLException e) {

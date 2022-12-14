@@ -6,6 +6,9 @@ module by.bsuir.client {
     requires java.sql;
     requires org.controlsfx.controls;
     requires org.apache.commons.codec;
+    requires java.datatransfer;
+    requires itextpdf;
+    requires icu4j;
 
     opens by.bsuir.client to javafx.fxml;
     exports by.bsuir.client;

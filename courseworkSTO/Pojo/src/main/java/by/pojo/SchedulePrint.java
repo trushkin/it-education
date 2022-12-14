@@ -69,6 +69,10 @@ public class SchedulePrint implements Serializable {
         return mileage;
     }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public LocalDateTime getStartDate() {
         return startDate;
     }

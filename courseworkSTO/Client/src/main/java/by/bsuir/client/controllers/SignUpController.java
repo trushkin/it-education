@@ -35,7 +35,7 @@ public class SignUpController {
 
     public void OnBtnSignUpClick(ActionEvent actionEvent) throws IOException, SQLException {
         if (!tfUsername.getText().equals("") && !tfPassword.getText().equals("")) {
-            User newUser = new User(tfUsername.getText(), md5Apache(tfPassword.getText()));
+            User newUser = new User(tfUsername.getText(), md5Apache(tfPassword.getText()), "Receptionist");
             boolean flag = connection.createUser(newUser);
             if (flag == true) {
                 showAlert("", "Пользователь создан успешно", Alert.AlertType.INFORMATION);
