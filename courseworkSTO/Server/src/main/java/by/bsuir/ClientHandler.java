@@ -1,7 +1,8 @@
 package by.bsuir;
 
 import by.bsuir.car.*;
-import by.bsuir.charts.GetInfoToBarCharCommand;
+import by.bsuir.charts.GetRevenueToBarChartCommand;
+import by.bsuir.charts.GetWorkLoadInfoToBarCharCommand;
 import by.bsuir.client.CreateClientCommand;
 import by.bsuir.client.DeleteClientCommand;
 import by.bsuir.client.GetAllClientsCommand;
@@ -169,8 +170,8 @@ public class ClientHandler extends Thread {
                     CreateScheduleCommand createScheduleCommand = new CreateScheduleCommand(clientConnector);
                     createScheduleCommand.execute();
                 }
-                case "GET_INFO_TO_BARCHART" -> {
-                    GetInfoToBarCharCommand getInfoToBarCharCommand = new GetInfoToBarCharCommand(clientConnector);
+                case "GET_WORKLOAD_INFO_TO_BARCHART" -> {
+                    GetWorkLoadInfoToBarCharCommand getInfoToBarCharCommand = new GetWorkLoadInfoToBarCharCommand(clientConnector);
                     getInfoToBarCharCommand.execute();
                 }
                 case "LOGIN" -> {
@@ -193,6 +194,9 @@ public class ClientHandler extends Thread {
                     UpdateUserCommand updateUserCommand = new UpdateUserCommand(clientConnector);
                     updateUserCommand.execute();
                 }
+                case "GET_REVENUE_INFO_TO_BARCHART" -> {
+                    GetRevenueToBarChartCommand getRevenueToBarChartCommand = new GetRevenueToBarChartCommand(clientConnector);
+                    getRevenueToBarChartCommand.execute();                }
                 default -> throw new IllegalStateException("Unexpected value: " + command);
             }
         }
@@ -200,14 +204,12 @@ public class ClientHandler extends Thread {
 
     @Override
     public void run() {
-        System.out.println("start run");
         try {
             clientProcessing();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
 
         }
-        System.out.println("start run");
         super.run();
     }
 }

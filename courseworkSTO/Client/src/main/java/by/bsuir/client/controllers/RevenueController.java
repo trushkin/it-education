@@ -10,8 +10,7 @@ import java.util.ArrayList;
 
 import static by.bsuir.client.ClientApp.connection;
 
-public class BarChartController {
-
+public class RevenueController {
     @FXML
     private BarChart barChart;
 
@@ -22,7 +21,7 @@ public class BarChartController {
         series2.setName("Подъемник 2");
         XYChart.Series series3 = new XYChart.Series();
         series3.setName("Подъемник 3");
-        ArrayList<InfoToBarChart> statistics = connection.getInfoToBarChart(LocalDateTime.now().plusDays(1));
+        ArrayList<InfoToBarChart> statistics = connection.getRevenueInfoToBarChart(LocalDateTime.now().plusDays(1));
         for (int daysQuantity = 0; daysQuantity < 7; daysQuantity++) {
             for (InfoToBarChart temp : statistics) {
                 if (temp.getLiftId() == 1) {
@@ -33,7 +32,7 @@ public class BarChartController {
                     series3.getData().add(new XYChart.Data(temp.getDate().getDayOfMonth() + "." + temp.getDate().getMonthValue() + "." + temp.getDate().getYear(), temp.getQuantity()));
                 }
             }
-            statistics = connection.getInfoToBarChart(LocalDateTime.now().minusDays(daysQuantity));
+            statistics = connection.getRevenueInfoToBarChart(LocalDateTime.now().minusDays(daysQuantity));
         }
         barChart.getData().addAll(series1, series2, series3);
 

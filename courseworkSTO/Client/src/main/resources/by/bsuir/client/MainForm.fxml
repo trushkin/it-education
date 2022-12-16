@@ -22,7 +22,8 @@
               <items>
                 <MenuItem fx:id="menuPart" mnemonicParsing="false" onAction="#onMenuPartClick" text="Запчасти" />
                 <MenuItem fx:id="menuOperation" mnemonicParsing="false" onAction="#onMenuOperationClick" text="Работы" />
-                  <MenuItem fx:id="menuCharts" mnemonicParsing="false" onAction="#onMenuChartsClicked" text="Графики" />
+                  <MenuItem fx:id="menuWorkload" mnemonicParsing="false" onAction="#onMenuWorkloadClicked" text="График загруженности" />
+                  <MenuItem fx:id="menuRevenueload" mnemonicParsing="false" onAction="#onMenuRevenueloadClicked" text="График выручки" />
                   <MenuItem fx:id="menuReport" mnemonicParsing="false" onAction="#onMenuReportClicked" text="Печать расписания" />
               </items>
             </MenuButton>

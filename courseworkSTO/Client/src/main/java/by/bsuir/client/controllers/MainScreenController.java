@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import by.bsuir.client.service.BuildReport;
+
 import static by.bsuir.client.ClientApp.connection;
 import static by.bsuir.client.controllers.LoginController.role;
 public class MainScreenController {
@@ -101,9 +101,9 @@ public class MainScreenController {
         refreshTable();
     }
 
-    public void onMenuChartsClicked(ActionEvent actionEvent) throws IOException {
+    public void onMenuWorkloadClicked(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL temp = getClass().getResource("/by/bsuir/client/BarChartForm.fxml");
+        URL temp = getClass().getResource("/by/bsuir/client/WorkLoadForm.fxml");
         loader.setLocation(temp);
         Parent root = loader.load();
         //создание нового окна
@@ -111,6 +111,7 @@ public class MainScreenController {
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
+        stage.setTitle("Загруженность подъемников за неделю");
         //блокировка главного окна
         stage.initOwner(this.btnAddCar.getScene().getWindow());
         //ожидание закрытия окна
@@ -145,6 +146,25 @@ public class MainScreenController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void onMenuRevenueloadClicked(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL temp = getClass().getResource("/by/bsuir/client/RevenueForm.fxml");
+        loader.setLocation(temp);
+        Parent root = loader.load();
+        //создание нового окна
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setTitle("Выручка по подъемникам за неделю");
+        //блокировка главного окна
+        stage.initOwner(this.btnAddCar.getScene().getWindow());
+        //ожидание закрытия окна
+        stage.showAndWait();
+        tvSchedule.getColumns().clear();
+        refreshTable();
     }
 
     class ColoredTableCell extends TableCell<ScheduleRow, String> {
@@ -264,7 +284,7 @@ public class MainScreenController {
             liftColumn.setCellValueFactory(p -> p.getValue().getSchedulePerLift(curLift.getLiftID()));
             liftColumn.setCellFactory(p -> new ColoredTableCell());
             tvSchedule.getColumns().add(liftColumn);
-            liftColumn.prefWidthProperty().bind(tvSchedule.widthProperty().multiply(0.45));
+            liftColumn.prefWidthProperty().bind(tvSchedule.widthProperty().multiply(0.30));
             liftColumn.setResizable(false);
             liftColumn.setSortable(false);
         }

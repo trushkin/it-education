@@ -4,7 +4,6 @@ import by.bsuir.service.ClientConnector;
 import by.bsuir.service.DatabaseConnection;
 import by.bsuir.service.ManageCommand;
 import by.pojo.InfoToBarChart;
-import by.pojo.Lift;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,11 +14,11 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class GetInfoToBarCharCommand implements ManageCommand {
+public class GetWorkLoadInfoToBarCharCommand implements ManageCommand {
     private ClientConnector clientConnector;
     private static Logger logger = LogManager.getLogger();
 
-    public GetInfoToBarCharCommand(ClientConnector clientConnector) {
+    public GetWorkLoadInfoToBarCharCommand(ClientConnector clientConnector) {
         this.clientConnector = clientConnector;
     }
 

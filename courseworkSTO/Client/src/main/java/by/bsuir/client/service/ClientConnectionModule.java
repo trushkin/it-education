@@ -268,9 +268,9 @@ public class ClientConnectionModule {
         }
     }
 
-    public ArrayList<InfoToBarChart> getInfoToBarChart(LocalDateTime date) {
+    public ArrayList<InfoToBarChart> getWorkLoadInfoToBarChart(LocalDateTime date) {
         try {
-            sendObject("GET_INFO_TO_BARCHART");
+            sendObject("GET_WORKLOAD_INFO_TO_BARCHART");
             sendObject(date);
             return receiveObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -325,6 +325,16 @@ public class ClientConnectionModule {
             throw new RuntimeException(e);
         }
     }
+    public ArrayList<InfoToBarChart> getRevenueInfoToBarChart(LocalDateTime date) {
+        try {
+            sendObject("GET_REVENUE_INFO_TO_BARCHART");
+            sendObject(date);
+            return receiveObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
 
