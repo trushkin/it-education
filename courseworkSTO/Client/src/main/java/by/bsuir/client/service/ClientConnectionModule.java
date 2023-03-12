@@ -2,21 +2,26 @@ package by.bsuir.client.service;
 
 
 import by.pojo.*;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+@Component
 public class ClientConnectionModule {
     private Socket socket;
-    private final String serverIp;
-    private final int serverPort;
+    private String serverIp;
+    private int serverPort;
 
     public ClientConnectionModule(String serverIp, int serverPort) {
-
         this.serverIp = serverIp;
         this.serverPort = serverPort;
+    }
+
+    public ClientConnectionModule() {
+        super();
     }
 
     private void sendObject(Serializable object) throws IOException {
@@ -289,7 +294,8 @@ public class ClientConnectionModule {
             throw new RuntimeException(e);
         }
     }
-    public boolean createUser(User user){
+
+    public boolean createUser(User user) {
         try {
             sendObject("CREATE_USER");
             sendObject(user);
@@ -298,7 +304,8 @@ public class ClientConnectionModule {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<User> getAllUsers(){
+
+    public ArrayList<User> getAllUsers() {
         try {
             sendObject("GET_ALL_USERS");
             return receiveObject();
@@ -306,6 +313,7 @@ public class ClientConnectionModule {
             throw new RuntimeException(e);
         }
     }
+
     public boolean deleteUser(int userId) {
         try {
             sendObject("DELETE_USER");
@@ -325,6 +333,7 @@ public class ClientConnectionModule {
             throw new RuntimeException(e);
         }
     }
+
     public ArrayList<InfoToBarChart> getRevenueInfoToBarChart(LocalDateTime date) {
         try {
             sendObject("GET_REVENUE_INFO_TO_BARCHART");

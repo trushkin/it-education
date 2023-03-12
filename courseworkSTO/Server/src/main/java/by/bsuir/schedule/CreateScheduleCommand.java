@@ -14,7 +14,7 @@ import java.sql.*;
 
 public class CreateScheduleCommand implements ManageCommand {
     private ClientConnector clientConnector;
-    private static Logger logger = LogManager.getLogger();
+    private static Logger logger = LogManager.getLogger(CreateScheduleCommand.class);
 
     public CreateScheduleCommand(ClientConnector clientConnector) {
         this.clientConnector = clientConnector;
@@ -33,7 +33,7 @@ public class CreateScheduleCommand implements ManageCommand {
                 schedule.setScheduleID(rs.getInt(1));
             }
             if (code == 1) {
-                logger.debug("Schedule with ID: {} created successfully", schedule.getScheduleID());
+                logger.info("Schedule with ID: {} created successfully", schedule.getScheduleID());
             }
             sqlQuery = "INSERT INTO ScheduleOperation(ScheduleID, OperationID) Values(?, ?)";
             statement = DatabaseConnection.getConnection().prepareStatement(sqlQuery);

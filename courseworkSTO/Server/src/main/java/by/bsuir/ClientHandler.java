@@ -21,182 +21,158 @@ import by.bsuir.schedule.CreateScheduleCommand;
 import by.bsuir.schedule.DeleteScheduleCommand;
 import by.bsuir.schedule.GetAllSchedulesCommand;
 import by.bsuir.schedule.GetSchedulesToPrintCommand;
-import by.bsuir.service.ClientConnector;
+import by.bsuir.service.ClientConnectorImpl;
 import by.bsuir.service.ConnectedClientInfo;
 import by.bsuir.user.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.ApplicationContext;
 
-import java.io.*;
-import java.net.Socket;
+import java.io.IOException;
 
 public class ClientHandler extends Thread {
     private final ConnectedClientInfo clientInfo;
 
-    public ClientHandler(ConnectedClientInfo clientInfo) {
-        this.clientInfo = clientInfo;
-    }
-
-    private void sendObject(Serializable object) throws IOException {
-
-        Socket socket = clientInfo.getConnectionSocket();
-        OutputStream outputStream = socket.getOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-        objectOutputStream.writeObject(object);
-        objectOutputStream.flush();
-    }
-
-    public <T> T receiveObject() throws IOException, ClassNotFoundException {
-
-        Socket socket = clientInfo.getConnectionSocket();
-        InputStream inputStream = socket.getInputStream();
-        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-        return (T) objectInputStream.readObject();
-    }
-
     private static Logger logger = LogManager.getLogger();
+    private ApplicationContext applicationContext;
+
+    public ClientHandler(ConnectedClientInfo clientInfo, ApplicationContext applicationContext) {
+        this.clientInfo = clientInfo;
+        this.applicationContext = applicationContext;
+    }
 
     private void clientProcessing() throws IOException, ClassNotFoundException {
-        ClientConnector clientConnector = new ClientConnector() {
-            @Override
-            public <T> T receiveObject() throws IOException, ClassNotFoundException {
-                return ClientHandler.this.receiveObject();
-            }
-
-            @Override
-            public void sendObject(Serializable object) throws IOException {
-                ClientHandler.this.sendObject(object);
-            }
-        };
+        ClientConnectorImpl clientConnector = applicationContext.getBean(ClientConnectorImpl.class, this.clientInfo);
         while (true) {
-            String command = receiveObject();
+            String command = clientConnector.receiveObject();
             if (!command.equals("GET_WORKING_HOURS")) {
                 logger.info("Received command: " + command);
             }
             switch (command) {
                 case "GET_ALL_CLIENTS" -> {
-                    GetAllClientsCommand getAllClientsCommand = new GetAllClientsCommand(clientConnector);
+                    GetAllClientsCommand getAllClientsCommand = applicationContext.getBean(GetAllClientsCommand.class, clientConnector);
                     getAllClientsCommand.execute();
                 }
                 case "CREATE_CLIENT" -> {
-                    CreateClientCommand createClientCommand = new CreateClientCommand(clientConnector);
+                    CreateClientCommand createClientCommand = applicationContext.getBean(CreateClientCommand.class, clientConnector);
                     createClientCommand.execute();
                 }
                 case "DELETE_CLIENT" -> {
-                    DeleteClientCommand deleteClientCommand = new DeleteClientCommand(clientConnector);
+                    DeleteClientCommand deleteClientCommand = applicationContext.getBean(DeleteClientCommand.class, clientConnector);
                     deleteClientCommand.execute();
                 }
                 case "UPDATE_CLIENT" -> {
-                    UpdateClientCommand updateClientCommand = new UpdateClientCommand(clientConnector);
+                    UpdateClientCommand updateClientCommand = applicationContext.getBean(UpdateClientCommand.class, clientConnector);
                     updateClientCommand.execute();
                 }
                 case "LOAD_CARS_IN_TABLE" -> {
-                    LoadCarsInTableCommand getAllCarsCommand = new LoadCarsInTableCommand(clientConnector);
+                    LoadCarsInTableCommand getAllCarsCommand = applicationContext.getBean(LoadCarsInTableCommand.class, clientConnector);
                     getAllCarsCommand.execute();
                 }
                 case "CREATE_CAR" -> {
-                    CreateCarCommand createCarCommand = new CreateCarCommand(clientConnector);
+                    CreateCarCommand createCarCommand = applicationContext.getBean(CreateCarCommand.class, clientConnector);
                     createCarCommand.execute();
                 }
                 case "DELETE_CAR" -> {
-                    DeleteCarCommand deleteCarCommand = new DeleteCarCommand(clientConnector);
+                    DeleteCarCommand deleteCarCommand = applicationContext.getBean(DeleteCarCommand.class, clientConnector);
                     deleteCarCommand.execute();
                 }
                 case "UPDATE_CAR" -> {
-                    UpdateCarCommand updateCarCommand = new UpdateCarCommand(clientConnector);
+                    UpdateCarCommand updateCarCommand = applicationContext.getBean(UpdateCarCommand.class, clientConnector);
                     updateCarCommand.execute();
                 }
                 case "GET_SCHEDULES_TO_PRINT" -> {
-                    GetSchedulesToPrintCommand getSchedulesToPrintCommand = new GetSchedulesToPrintCommand(clientConnector);
+                    GetSchedulesToPrintCommand getSchedulesToPrintCommand = applicationContext.getBean(GetSchedulesToPrintCommand.class, clientConnector);
                     getSchedulesToPrintCommand.execute();
                 }
                 case "LOAD_CLIENT_CARS_IN_CB" -> {
-                    LoadClientCarsInCbCommand loadClientCarsInCbCommand = new LoadClientCarsInCbCommand(clientConnector);
+                    LoadClientCarsInCbCommand loadClientCarsInCbCommand = applicationContext.getBean(LoadClientCarsInCbCommand.class, clientConnector);
                     loadClientCarsInCbCommand.execute();
                 }
                 case "DELETE_SCHEDULE" -> {
-                    DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(clientConnector);
+                    DeleteScheduleCommand deleteScheduleCommand = applicationContext.getBean(DeleteScheduleCommand.class, clientConnector);
                     deleteScheduleCommand.execute();
                 }
                 case "GET_WORKING_HOURS" -> {
-                    GetWorkingHoursCommand getWorkingHoursCommand = new GetWorkingHoursCommand(clientConnector);
+                    GetWorkingHoursCommand getWorkingHoursCommand = applicationContext.getBean(GetWorkingHoursCommand.class, clientConnector);
                     getWorkingHoursCommand.execute();
                 }
                 case "GET_ALL_LIFTS" -> {
-                    GetAllLiftsCommand getAllLiftsCommand = new GetAllLiftsCommand(clientConnector);
+                    GetAllLiftsCommand getAllLiftsCommand = applicationContext.getBean(GetAllLiftsCommand.class, clientConnector);
                     getAllLiftsCommand.execute();
                 }
                 case "GET_ALL_CARS" -> {
-                    GetAllCarsCommand getAllCarsCommand = new GetAllCarsCommand(clientConnector);
+                    GetAllCarsCommand getAllCarsCommand = applicationContext.getBean(GetAllCarsCommand.class, clientConnector);
                     getAllCarsCommand.execute();
                 }
                 case "GET_ALL_SCHEDULES" -> {
-                    GetAllSchedulesCommand getAllSchedules = new GetAllSchedulesCommand(clientConnector);
+                    GetAllSchedulesCommand getAllSchedules = applicationContext.getBean(GetAllSchedulesCommand.class, clientConnector);
                     getAllSchedules.execute();
                 }
                 case "GET_ALL_OPERATIONS" -> {
-                    GetAllOperationsCommand getAllOperationsCommand = new GetAllOperationsCommand(clientConnector);
+                    GetAllOperationsCommand getAllOperationsCommand = applicationContext.getBean(GetAllOperationsCommand.class, clientConnector);
                     getAllOperationsCommand.execute();
                 }
                 case "DELETE_OPERATION" -> {
-                    DeleteOperationCommand deleteOperationCommand = new DeleteOperationCommand(clientConnector);
+                    DeleteOperationCommand deleteOperationCommand = applicationContext.getBean(DeleteOperationCommand.class, clientConnector);
                     deleteOperationCommand.execute();
                 }
                 case "CREATE_OPERATION" -> {
-                    CreateOperationCommand createOperationCommand = new CreateOperationCommand(clientConnector);
-                    createOperationCommand.execute();
+                    CreateOperationCommand createOperationCommand = applicationContext.getBean(CreateOperationCommand.class, clientConnector);
+                    createOperationCommand.unExecute();
                 }
                 case "UPDATE_OPERATION" -> {
-                    UpdateOperationCommand updateOperationCommand = new UpdateOperationCommand(clientConnector);
+                    UpdateOperationCommand updateOperationCommand = applicationContext.getBean(UpdateOperationCommand.class, clientConnector);
                     updateOperationCommand.execute();
                 }
                 case "GET_ALL_PARTS" -> {
-                    GetAllPartsCommand getAllPartsCommand = new GetAllPartsCommand(clientConnector);
+                    GetAllPartsCommand getAllPartsCommand = applicationContext.getBean(GetAllPartsCommand.class, clientConnector);
                     getAllPartsCommand.execute();
                 }
                 case "CREATE_PART" -> {
-                    CreatePartCommand createPartCommand = new CreatePartCommand(clientConnector);
+                    CreatePartCommand createPartCommand = applicationContext.getBean(CreatePartCommand.class, clientConnector);
                     createPartCommand.execute();
                 }
                 case "DELETE_PART" -> {
-                    DeletePartCommand deletePartCommand = new DeletePartCommand(clientConnector);
+                    DeletePartCommand deletePartCommand = applicationContext.getBean(DeletePartCommand.class, clientConnector);
                     deletePartCommand.execute();
                 }
                 case "UPDATE_PART" -> {
-                    UpdatePartCommand updatePartCommand = new UpdatePartCommand(clientConnector);
+                    UpdatePartCommand updatePartCommand = applicationContext.getBean(UpdatePartCommand.class, clientConnector);
                     updatePartCommand.execute();
                 }
                 case "CREATE_SCHEDULE" -> {
-                    CreateScheduleCommand createScheduleCommand = new CreateScheduleCommand(clientConnector);
+                    CreateScheduleCommand createScheduleCommand = applicationContext.getBean(CreateScheduleCommand.class, clientConnector);
                     createScheduleCommand.execute();
                 }
                 case "GET_WORKLOAD_INFO_TO_BARCHART" -> {
-                    GetWorkLoadInfoToBarCharCommand getInfoToBarCharCommand = new GetWorkLoadInfoToBarCharCommand(clientConnector);
+                    GetWorkLoadInfoToBarCharCommand getInfoToBarCharCommand = applicationContext.getBean(GetWorkLoadInfoToBarCharCommand.class, clientConnector);
                     getInfoToBarCharCommand.execute();
                 }
                 case "LOGIN" -> {
-                    LoginCommand loginCommand = new LoginCommand(clientConnector);
+                    LoginCommand loginCommand = applicationContext.getBean(LoginCommand.class, clientConnector);
                     loginCommand.execute();
                 }
                 case "CREATE_USER" -> {
-                    CreateUserCommand createUserCommand = new CreateUserCommand(clientConnector);
+                    CreateUserCommand createUserCommand = applicationContext.getBean(CreateUserCommand.class, clientConnector);
                     createUserCommand.execute();
                 }
                 case "GET_ALL_USERS" -> {
-                    GetAllUsersCommand getAllUsersCommand = new GetAllUsersCommand(clientConnector);
+                    GetAllUsersCommand getAllUsersCommand = applicationContext.getBean(GetAllUsersCommand.class, clientConnector);
                     getAllUsersCommand.execute();
                 }
                 case "DELETE_USER" -> {
-                    DeleteUserCommand deleteUserCommand = new DeleteUserCommand(clientConnector);
+                    DeleteUserCommand deleteUserCommand = applicationContext.getBean(DeleteUserCommand.class, clientConnector);
                     deleteUserCommand.execute();
                 }
                 case "UPDATE_USER" -> {
-                    UpdateUserCommand updateUserCommand = new UpdateUserCommand(clientConnector);
+                    UpdateUserCommand updateUserCommand = applicationContext.getBean(UpdateUserCommand.class, clientConnector);
                     updateUserCommand.execute();
                 }
                 case "GET_REVENUE_INFO_TO_BARCHART" -> {
-                    GetRevenueToBarChartCommand getRevenueToBarChartCommand = new GetRevenueToBarChartCommand(clientConnector);
-                    getRevenueToBarChartCommand.execute();                }
+                    GetRevenueToBarChartCommand getRevenueToBarChartCommand = applicationContext.getBean(GetRevenueToBarChartCommand.class, clientConnector);
+                    getRevenueToBarChartCommand.execute();
+                }
                 default -> throw new IllegalStateException("Unexpected value: " + command);
             }
         }

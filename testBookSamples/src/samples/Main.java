@@ -58,15 +58,15 @@ public class Main {
     static class B{}
     protected int b = 10;
     protected void foo(int a){}
-    public static void main(String[] args) {
-        MyClass myClass = new MyClass();
-        System.out.println(myClass.string);
-        Flower x = new Flower();
-        x.printPetalCount();
-        Random random = new Random();
-        for (int i = 0; i < 30; i++) {
-            System.out.println("37544" + random.nextInt(100000, 1000000));
-        }
-    }
+//    public static void main(String[] args) {
+//        MyClass myClass = new MyClass();
+//        System.out.println(myClass.string);
+//        Flower x = new Flower();
+//        x.printPetalCount();
+//        Random random = new Random();
+//        for (int i = 0; i < 30; i++) {
+//            System.out.println("37544" + random.nextInt(100000, 1000000));
+//        }
+//    }
 
 }

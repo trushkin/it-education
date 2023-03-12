@@ -3,7 +3,6 @@ package by.bsuir.operation;
 import by.bsuir.service.ClientConnector;
 import by.bsuir.service.DatabaseConnection;
 import by.bsuir.service.ManageCommand;
-import by.pojo.Client;
 import by.pojo.Operation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class CreateOperationCommand implements ManageCommand {
-    private static Logger logger = LogManager.getLogger();
+    private static Logger logger = LogManager.getLogger(CreateOperationCommand.class);
     private ClientConnector clientConnector;
 
     public CreateOperationCommand(ClientConnector clientConnector) {
@@ -36,4 +35,5 @@ public class CreateOperationCommand implements ManageCommand {
             throw new RuntimeException(e);
         }
     }
+
 }

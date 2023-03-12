@@ -55,6 +55,7 @@ public class MainScreenController {
     private static ArrayList<Lift> liftArrayList = connection.getAllLifts();
 
     public void initialize() {
+        role = "test";
         if(role.equals("Receptionist"))
         {
             adminMenu.setVisible(false);
@@ -307,7 +308,7 @@ public class MainScreenController {
                 if (s != null) {
                     Car c = getCarByID(s.getCarID(), carList);
                     SchedulePrint cell = new SchedulePrint(c.getStateNum(), c.getBrand(), c.getModel(), s.getScheduleID());
-                    if (scheduleRowList.size() > 0) { //выводить информацию о записи только в первой ячейке, а не во всех
+                    if (!scheduleRowList.isEmpty()) { //выводить информацию о записи только в первой ячейке, а не во всех
                         //загружаем из timeline расписание из последней строки и сравниваем с новым
                         SchedulePrint previousSchedule = scheduleRowList.get(scheduleRowList.size() - 1).getSchedulePerLift().get(curLift.getLiftID());
                         if (previousSchedule == null || s.getScheduleID() != previousSchedule.getScheduleID()) {

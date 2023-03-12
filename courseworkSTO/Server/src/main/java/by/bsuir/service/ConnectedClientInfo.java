@@ -1,21 +1,22 @@
 package by.bsuir.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.net.Socket;
 
-public class ConnectedClientInfo {
 
+public class ConnectedClientInfo {
     private Socket connectionSocket;
 
-    private ConnectedClientInfo() {
-        connectionSocket = new Socket();
+    public ConnectedClientInfo() {
     }
 
     public ConnectedClientInfo(Socket connectionSocket) {
-        this();
-        setConnectionSocket(connectionSocket);
+        this.connectionSocket = connectionSocket;
     }
 
-    public synchronized Socket getConnectionSocket() {
+    public Socket getConnectionSocket() {
         return connectionSocket;
     }
 
@@ -23,5 +24,6 @@ public class ConnectedClientInfo {
         if (connectionSocket == null) return;
         this.connectionSocket = connectionSocket;
     }
+
 }
 

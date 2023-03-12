@@ -10,11 +10,15 @@ module by.bsuir.client {
     requires itextpdf;
     requires icu4j;
 
-    opens by.bsuir.client to javafx.fxml;
+    requires spring.core;
+    requires spring.beans;
+    requires spring.context;
+
+    opens by.bsuir.client to javafx.fxml, spring.core;
     exports by.bsuir.client;
     exports by.bsuir.client.service;
-    opens by.bsuir.client.service to javafx.fxml;
+    opens by.bsuir.client.service to javafx.fxml, spring.core;
     exports by.bsuir.client.controllers;
-    opens by.bsuir.client.controllers to javafx.fxml;
+    opens by.bsuir.client.controllers to javafx.fxml, spring.core;
 
 }

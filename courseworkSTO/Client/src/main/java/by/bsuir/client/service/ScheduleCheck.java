@@ -14,7 +14,6 @@ public class ScheduleCheck {
         //LocalDateTime finalWorkingTime = startDate;
         Properties properties = connection.getWorkingHours();
         LocalDateTime endWorkTime = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), properties.getEndWorkTime().getHour(), 0);
-
         if (!startDate.plusMinutes((int) (duration * 60)).isAfter(endWorkTime)) {
             return startDate.plusMinutes((int) (duration * 60));
         }

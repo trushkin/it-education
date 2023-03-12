@@ -2,33 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3444c716-db83-4ba4-9c5f-826a9a59d615" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/AlertImp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/Schedule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/SchedulePrint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/schedule/GetSchedulesToPrintCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/package2/chapter7.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/schedule/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Coursework_OOP/src/main/java/by/bsuir/coursework/sto/schedule/Schedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/CarController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../courseworkSTO/.idea/courseworkSTO.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/service/ApplicationContextConnector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/service/ClientConnectorImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/resources/applicationContext.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/8/88a22d9e4d356a99b6aa3455ec929361f38ec24a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/InnerNestedClasses/DotNew.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/InnerNestedClasses/DotNewExtended.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/LambdaExamples/LambdaApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/polymorphism/shapes/Circle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/polymorphism/shapes/RandomShapeGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/polymorphism/shapes/Shape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/polymorphism/shapes/Shapes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/polymorphism/shapes/Square.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/polymorphism/shapes/Triangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/samples/staticExample/A.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/samples/staticExample/B.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientConnectionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientConnectionModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ViewAllSchedulesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/ViewAllSchedulesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Pojo/src/main/java/by/pojo/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/controllers/MainScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/controllers/MainScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/service/ScheduleCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/main/java/by/bsuir/client/service/ScheduleCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Client/src/test/java/ScheduleCheckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Client/src/test/java/ScheduleCheckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/CreateCarCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/CreateCarCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/DeleteCarCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/DeleteCarCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/GetAllCarsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/GetAllCarsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/UpdateCarCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/car/UpdateCarCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/CreateClientCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/CreateClientCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/DeleteClientCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/DeleteClientCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/UpdateClientCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/client/UpdateClientCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/operation/CreateOperationCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/operation/CreateOperationCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/schedule/CreateScheduleCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/schedule/CreateScheduleCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/service/ConnectedClientInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/service/ConnectedClientInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/service/ManageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/java/by/bsuir/service/ManageCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/resources/log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../courseworkSTO/Server/src/main/resources/log4j2.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package2/AccessTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package2/chapter7.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/samples/AccessTestSamples.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/samples/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/samples/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +46,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -64,10 +73,54 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-18&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/workspace/git/it-education/testBookSamples&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.LambdaApp">
+    <configuration name="B" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="samples.staticExample.B" />
+      <module name="bookSamples" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="samples.staticExample.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DotNew" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InnerNestedClasses.DotNew" />
+      <module name="bookSamples" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="samples.staticExample.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LambdaApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LambdaExamples.LambdaApp" />
+      <module name="bookSamples" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="LambdaExamples.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="samples.Main" />
       <module name="bookSamples" />
@@ -81,8 +134,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Shapes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="polymorphism.shapes.Shapes" />
+      <module name="bookSamples" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="polymorphism.shapes.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DotNew" />
+        <item itemvalue="Application.LambdaApp" />
+        <item itemvalue="Application.B" />
+        <item itemvalue="Application.Shapes" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -95,8 +165,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667894773128</updated>
+      <workItem from="1677668882929" duration="749000" />
+      <workItem from="1677788489456" duration="644000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

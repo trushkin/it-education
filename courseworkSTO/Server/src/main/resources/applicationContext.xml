@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="connectedClientInfo"
+          class="by.bsuir.service.ConnectedClientInfo"
+          scope="prototype">
+    </bean>
+    <bean id="clientHandler"
+          class="by.bsuir.ClientHandler"
+          scope="prototype">
+    </bean>
+    <bean id="clientConnectorImpl"
+          class="by.bsuir.service.ClientConnectorImpl"
+          scope="prototype">
+    </bean>
+    <bean id="getAllClientsCommand"
+          class="by.bsuir.client.GetAllClientsCommand"
+          scope="prototype">
+    </bean>
+    <bean id="createClientCommand"
+          class="by.bsuir.client.CreateClientCommand"
+          scope="prototype">
+    </bean>
+    <bean id="deleteClientCommand"
+          class="by.bsuir.client.DeleteClientCommand"
+          scope="prototype">
+    </bean>
+    <bean id="updateClientCommand"
+          class="by.bsuir.client.UpdateClientCommand"
+          scope="prototype">
+    </bean>
+    <bean id="loadCarsInTableCommand"
+          class="by.bsuir.car.LoadCarsInTableCommand"
+          scope="prototype">
+    </bean>
+    <bean id="createCarCommand"
+          class="by.bsuir.car.CreateCarCommand"
+          scope="prototype">
+    </bean>
+    <bean id="deleteCarCommand"
+          class="by.bsuir.car.DeleteCarCommand"
+          scope="prototype">
+    </bean>
+    <bean id="updateCarCommand"
+          class="by.bsuir.car.UpdateCarCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getAllCarsCommand"
+          class="by.bsuir.car.GetAllCarsCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getSchedulesToPrintCommand"
+          class="by.bsuir.schedule.GetSchedulesToPrintCommand"
+          scope="prototype">
+    </bean>
+    <bean id="loadClientCarsInCbCommand"
+          class="by.bsuir.car.LoadClientCarsInCbCommand"
+          scope="prototype">
+    </bean>
+    <bean id="deleteScheduleCommand"
+          class="by.bsuir.schedule.DeleteScheduleCommand"
+          scope="prototype"
+    />
+    <bean id="createScheduleCommand"
+          class="by.bsuir.schedule.CreateScheduleCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getAllSchedulesCommand"
+          class="by.bsuir.schedule.GetAllSchedulesCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getWorkingHoursCommand"
+          class="by.bsuir.properties.GetWorkingHoursCommand"
+          scope="prototype">
+    </bean>
+    <bean id="createPartCommand"
+          class="by.bsuir.parts.CreatePartCommand"
+          scope="prototype">
+    </bean>
+    <bean id="deletePartCommand"
+          class="by.bsuir.parts.DeletePartCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getAllPartsCommand"
+          class="by.bsuir.parts.GetAllPartsCommand"
+          scope="prototype">
+    </bean>
+    <bean id="updatePartCommand"
+          class="by.bsuir.parts.UpdatePartCommand"
+          scope="prototype">
+    </bean>
+    <bean id="createOperationCommand"
+          class="by.bsuir.operation.CreateOperationCommand"
+          scope="prototype">
+    </bean>
+    <bean id="deleteOperationCommand"
+          class="by.bsuir.operation.DeleteOperationCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getAllOperationsCommand"
+          class="by.bsuir.operation.GetAllOperationsCommand"
+          scope="prototype">
+    </bean>
+    <bean id="updateOperationCommand"
+          class="by.bsuir.operation.UpdateOperationCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getAllLiftsCommand"
+          class="by.bsuir.lift.GetAllLiftsCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getRevenueToBarChartCommand"
+          class="by.bsuir.charts.GetRevenueToBarChartCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getWorkLoadInfoToBarCharCommand"
+          class="by.bsuir.charts.GetWorkLoadInfoToBarCharCommand"
+          scope="prototype">
+    </bean>
+    <bean id="createUserCommand"
+          class="by.bsuir.user.CreateUserCommand"
+          scope="prototype">
+    </bean>
+    <bean id="deleteUserCommand"
+          class="by.bsuir.user.DeleteUserCommand"
+          scope="prototype">
+    </bean>
+    <bean id="getAllUsersCommand"
+          class="by.bsuir.user.GetAllUsersCommand"
+          scope="prototype">
+    </bean>
+    <bean id="loginCommand"
+          class="by.bsuir.user.LoginCommand"
+          scope="prototype">
+    </bean>
+    <bean id="updateUserCommand"
+          class="by.bsuir.user.UpdateUserCommand"
+          scope="prototype">
+    </bean>
+
+</beans>
